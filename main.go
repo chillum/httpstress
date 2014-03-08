@@ -1,4 +1,10 @@
-/* httpstress-go is a CLI interface for httpstress library. */
+/* httpstress-go is a CLI interface for httpstress library.
+Use it for stress testing of HTTP servers with many concurrent connections.
+
+Usage: httpstress-go -c {concurrent} -m {total} {URL list}
+e.g. httpstress-go -c 1000 -m 2000 http://localhost http://google.com
+
+{concurrent} defaults to 1000, {total} is optional.*/
 package main
 /* Copyright 2014 Chai Chillum
 
