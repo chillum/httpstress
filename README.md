@@ -4,6 +4,8 @@ httpstress-go is a CLI interface for
 
 Use it for stress testing of HTTP servers with many concurrent connections.
 
+Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options.
+
 ### Installation
 * Install [Go runtime](http://golang.org/doc/install)
 * `go get github.com/chillum/httpstress-go`

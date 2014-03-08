@@ -4,7 +4,9 @@ Use it for stress testing of HTTP servers with many concurrent connections.
 Usage: httpstress-go -c {concurrent} -m {total} {URL list}
 e.g. httpstress-go -c 1000 -m 2000 http://localhost http://google.com
 
-{concurrent} defaults to 1000, {total} is optional.*/
+{concurrent} defaults to 1000, {total} is optional.
+
+Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options. */
 package main
 /* Copyright 2014 Chai Chillum
 
@@ -36,19 +38,20 @@ func main() {
 	urls := flag.Args()
 	if len(urls) < 1 {
 		Println("Usage:", Args[0], "<http://url1> [http://url2] ... [http://urlN]")
-		Exit(1)
+		Exit(2)
 	}
 
 	out, err := Test(conn, max, urls)
 	if err != nil {
 		Println("ERROR:", err)
-		Exit(1)
+		Exit(2)
 	}
 	if len(out) > 0 {
 		Println("Test finished. Failed requests:")
 		for url, num := range out {
 			Print(" ", url, ": ", num, "\n")
 		}
+		Exit(1)
 	} else {
 		Println("Test finished. No failed requests.")
 	}
