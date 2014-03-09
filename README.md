@@ -11,10 +11,13 @@ Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid o
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
 
+### Environment
+* `GOMAXPROCS`: Go threads number (defaults to CPU count + 1)
+
 ### Options
-* `-c NUM` -- concurrent connections number (defaults to 1)
-* `-n NUM` -- total connections number (optional)
-* `URL list` -- URLs to fetch
+* `-c NUM`: concurrent connections number (defaults to 1)
+* `-n NUM`: total connections number (optional)
+* `URL list`: URLs to fetch
 
 ### Example usage
 `httpstress-go -c 1000 -n 2000 http://localhost http://google.com`

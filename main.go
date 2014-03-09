@@ -6,8 +6,12 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
 {concurrent} defaults to 1, {total} is optional.
 
-Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options. */
+Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options.
+
+Please note that this utility uses GOMAXPROCS environment variable if it's present.
+If not, this defaults to CPU count + 1. */
 package main
+
 /* Copyright 2014 Chai Chillum
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,6 +31,7 @@ import (
 	. "fmt"
 	. "github.com/chillum/httpstress"
 	. "os"
+	. "runtime"
 )
 
 func main() {
@@ -39,6 +44,10 @@ func main() {
 	if len(urls) < 1 {
 		Println("Usage:", Args[0], "<http://url1> [http://url2] ... [http://urlN]")
 		Exit(2)
+	}
+
+	if Getenv("GOMAXPROCS") == "" {
+		GOMAXPROCS(NumCPU() + 1)
 	}
 
 	out, err := Test(conn, max, urls)
