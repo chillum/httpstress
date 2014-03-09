@@ -12,8 +12,8 @@ Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid o
 * Ready to use: launch `httpstress-go` with desired options
 
 ### Options
-* `-c NUM` -- concurrent connections number (defaults to 1000)
-* `-m NUM` -- total connections number (optional)
+* `-c NUM` -- concurrent connections number (defaults to 1)
+* `-n NUM` -- total connections number (optional)
 * `URL list` -- URLs to fetch
 
 ### Example usage

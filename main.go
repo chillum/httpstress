@@ -1,10 +1,10 @@
 /* httpstress-go is a CLI interface for httpstress library.
 Use it for stress testing of HTTP servers with many concurrent connections.
 
-Usage: httpstress-go -c {concurrent} -m {total} {URL list}
-e.g. httpstress-go -c 1000 -m 2000 http://localhost http://google.com
+Usage: httpstress-go -c {concurrent} -n {total} {URL list}
+e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
-{concurrent} defaults to 1000, {total} is optional.
+{concurrent} defaults to 1, {total} is optional.
 
 Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options. */
 package main
@@ -31,8 +31,8 @@ import (
 
 func main() {
 	var conn, max int
-	flag.IntVar(&conn, "c", 1000, "concurrent connections count")
-	flag.IntVar(&max, "m", 0, "total connections (optional)")
+	flag.IntVar(&conn, "c", 1, "concurrent connections count")
+	flag.IntVar(&max, "n", 0, "total connections (optional)")
 	flag.Parse()
 
 	urls := flag.Args()
