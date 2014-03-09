@@ -17,4 +17,4 @@ Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid o
 * `URL list` -- URLs to fetch
 
 ### Example usage
-`httpstress-go -c 1000 -m 2000 http://localhost http://google.com`
+`httpstress-go -c 1000 -n 2000 http://localhost http://google.com`
