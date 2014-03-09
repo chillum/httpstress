@@ -11,7 +11,6 @@ Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid o
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1. */
 package main
-
 /* Copyright 2014 Chai Chillum
 
 Licensed under the Apache License, Version 2.0 (the "License");
