@@ -8,6 +8,8 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
 Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options.
 
+Prints error count for each URL to stdout (does not count successful attempts).
+
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1. */
 package main

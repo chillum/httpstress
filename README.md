@@ -6,6 +6,8 @@ Use it for stress testing of HTTP servers with many concurrent connections.
 
 Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options.
 
+Prints error count for each URL to stdout (does not count successful attempts).
+
 ### Installation
 * Install [Go runtime](http://golang.org/doc/install)
 * `go get github.com/chillum/httpstress-go`
