@@ -9,7 +9,8 @@ Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid o
 Prints error count for each URL to stdout (does not count successful attempts).
 
 ### Installation
-* Install [Go runtime](http://golang.org/doc/install)
+* Install [Go runtime](http://golang.org/doc/install).
+  Go 1.3 or higher is recommended because of performance improvements
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
