@@ -30,10 +30,10 @@ limitations under the License. */
 
 import (
 	"flag"
-	. "fmt"
-	. "github.com/chillum/httpstress"
-	. "os"
-	. "runtime"
+	"fmt"
+	"github.com/chillum/httpstress"
+	"os"
+	"runtime"
 )
 
 func main() {
@@ -44,26 +44,26 @@ func main() {
 
 	urls := flag.Args()
 	if len(urls) < 1 {
-		Println("Usage:", Args[0], "<http://url1> [http://url2] ... [http://urlN]")
-		Exit(2)
+		fmt.Println("Usage:", os.Args[0], "<http://url1> [http://url2] ... [http://urlN]")
+		os.Exit(2)
 	}
 
-	if Getenv("GOMAXPROCS") == "" {
-		GOMAXPROCS(NumCPU() + 1)
+	if os.Getenv("GOMAXPROCS") == "" {
+		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-	out, err := Test(conn, max, urls)
+	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
-		Println("ERROR:", err)
-		Exit(2)
+		fmt.Println("ERROR:", err)
+		os.Exit(2)
 	}
 	if len(out) > 0 {
-		Println("Test finished. Failed requests:")
+		fmt.Println("Test finished. Failed requests:")
 		for url, num := range out {
-			Print(" ", url, ": ", num, "\n")
+			fmt.Print(" ", url, ": ", num, "\n")
 		}
-		Exit(1)
+		os.Exit(1)
 	} else {
-		Println("Test finished. No failed requests.")
+		fmt.Println("Test finished. No failed requests.")
 	}
 }
