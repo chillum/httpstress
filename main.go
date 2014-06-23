@@ -11,7 +11,10 @@ Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case o
 Prints error count for each URL to stdout (does not count successful attempts).
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
-If not, this defaults to CPU count + 1. */
+If not, this defaults to CPU count + 1.
+
+Also this ulility sets `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD).
+*/
 package main
 
 /* Copyright 2014 Chai Chillum
