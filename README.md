@@ -15,6 +15,9 @@ Prints error count for each URL to stdout (does not count successful attempts).
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
+
+### Notes
+* This ulility takes care of `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD)
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
   it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`

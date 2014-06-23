@@ -34,6 +34,7 @@ import (
 	"github.com/chillum/httpstress"
 	"os"
 	"runtime"
+	"syscall"
 )
 
 func main() {
@@ -51,6 +52,12 @@ func main() {
 	if os.Getenv("GOMAXPROCS") == "" {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
+
+	// Set Unix limits. Should be a no-op on Windows.
+	var rLimit syscall.Rlimit
+	rLimit.Cur = uint64(conn + 6) // Magic. 1-5 does not work, 6 seems OK.
+	rLimit.Max = rLimit.Cur
+	syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit)
 
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
