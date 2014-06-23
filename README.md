@@ -1,6 +1,4 @@
-## httpstress-go
-
-[![Build Status](https://travis-ci.org/chillum/httpstress-go.svg?branch=master)](https://travis-ci.org/chillum/httpstress-go)
+## httpstress-go [![Build Status](https://travis-ci.org/chillum/httpstress-go.svg?branch=master)](https://travis-ci.org/chillum/httpstress-go)
 
 httpstress-go is a CLI interface for
 [httpstress](https://github.com/chillum/httpstress.git) library.
