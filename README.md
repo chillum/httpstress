@@ -17,7 +17,8 @@ Prints error count for each URL to stdout (does not count successful attempts).
 * Ready to use: launch `httpstress-go` with desired options
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
-  it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`,
+  it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`
+  (`%GOPATH%\bin\httpstress-go.exe` on Windows),
   compiled on matching system and architecture
 
 ### Environment
