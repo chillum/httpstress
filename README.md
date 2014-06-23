@@ -15,6 +15,10 @@ Prints error count for each URL to stdout (does not count successful attempts).
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
+* `httpstress-go` is
+  [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
+  it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`,
+  compiled on matching system and architecture
 
 ### Environment
 * `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
