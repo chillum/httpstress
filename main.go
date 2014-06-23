@@ -6,7 +6,7 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
 {concurrent} defaults to 1, {total} is optional.
 
-Returns 0 if no errors, 1 if some errors (see stdout) and 2 in case of invalid options.
+Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 
@@ -45,7 +45,7 @@ func main() {
 	urls := flag.Args()
 	if len(urls) < 1 {
 		fmt.Println("Usage:", os.Args[0], "<http://url1> [http://url2] ... [http://urlN]")
-		os.Exit(2)
+		os.Exit(3)
 	}
 
 	if os.Getenv("GOMAXPROCS") == "" {
@@ -55,7 +55,7 @@ func main() {
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
 		fmt.Println("ERROR:", err)
-		os.Exit(2)
+		os.Exit(3)
 	}
 	if len(out) > 0 {
 		fmt.Println("Test finished. Failed requests:")
