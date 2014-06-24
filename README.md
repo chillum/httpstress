@@ -7,12 +7,21 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
 {concurrent} defaults to 1, {total} is optional.
 
-Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case of invalid options.
+Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
 ### Installation
+* If you're not a Go programmer, you may want to use pre-compiled
+  binary builds, not building from source
+* 64-bit (amd64/x86_64 only) static binary builds are provided for:
+  * [Windows](../../releases/download/v1.2/win.zip) (compiled on Windows 7 SP1)
+  * [Mac OS X](../../releases/download/v1.2/mac.zip) (compiled on a 10.8 system)
+  * [Linux](../../releases/download/v1.2/linux.tar.gz) (compiled on CentOS 6.5)
+* Download the appropriate file and launch `httpstress-go` with desired options
+
+### Building
 * Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
