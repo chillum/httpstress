@@ -56,7 +56,6 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-
 	switch runtime.GOOS {
 	case "windows", "nacl", "plan9":
 		// Skip the rlimit syscall on Windows and NaCL. Not sure about Plan 9.
