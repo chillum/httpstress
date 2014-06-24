@@ -5,9 +5,10 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 
 {concurrent} defaults to 1, {total} is optional.
 
-Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case of invalid options.
+Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
+Errors and debugging information go to stderr.
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
@@ -43,10 +44,10 @@ func main() {
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
 	flag.Usage = func() {
 		// TODO: stderr
-		fmt.Println("Usage:", os.Args[0], "[options] <http://url1> [http://url2] ... [http://urlN]")
+		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <http://url1> [http://url2] ... [http://urlN]")
 		flag.PrintDefaults()
-		fmt.Println("Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
-		fmt.Println("  godoc github.com/chillum/httpstress-go")
+		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
+		fmt.Fprintln(os.Stderr, "  godoc github.com/chillum/httpstress-go")
 		os.Exit(3)
 	}
 	flag.Parse()
@@ -61,16 +62,16 @@ func main() {
 
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
-		fmt.Println("ERROR:", err)
+		fmt.Fprintln(os.Stderr, "ERROR:", err)
 		os.Exit(3)
 	}
 	if len(out) > 0 {
-		fmt.Println("Test finished. Failed requests:")
+		fmt.Fprintln(os.Stderr, "Test finished. Failed requests:")
 		for url, num := range out {
 			fmt.Print(" ", url, ": ", num, "\n")
 		}
 		os.Exit(1)
 	} else {
-		fmt.Println("Test finished. No failed requests.")
+		fmt.Fprintln(os.Stderr, "Test finished. No failed requests.")
 	}
 }

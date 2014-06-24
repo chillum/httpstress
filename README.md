@@ -10,6 +10,7 @@ e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
 Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
+Errors and debugging information go to stderr.
 
 ### Installation
 * Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
