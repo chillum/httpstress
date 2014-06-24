@@ -10,6 +10,7 @@ Returns 0 if no errors, 1 if some errors (see stdout), 2 on kill and 3 in case o
 Prints error count for each URL to stdout (does not count successful attempts).
 
 ### Installation
+* Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
 * Install [Go runtime](http://golang.org/doc/install).
   Go 1.3 or higher on amd64 is recommended because of performance issues
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
@@ -17,7 +18,7 @@ Prints error count for each URL to stdout (does not count successful attempts).
 * Ready to use: launch `httpstress-go` with desired options
 
 ### Notes
-* This ulility takes care of `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD)
+* This ulility takes care of `ulimit -n` on Unix systems
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
   it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`

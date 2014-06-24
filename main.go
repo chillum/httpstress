@@ -57,8 +57,8 @@ func main() {
 	}
 
 	switch runtime.GOOS {
-	case "windows", "nacl", "plan9":
-		// Skip the rlimit syscall on Windows and NaCL. Not sure about Plan 9.
+	case "windows":
+		// Skip the rlimit syscall on Windows.
 	default:
 		// Set Unix limits on Unix systems.
 		var rLimit syscall.Rlimit
