@@ -56,11 +56,8 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-	switch runtime.GOOS {
-	case "windows":
-		// Skip the rlimit syscall on Windows.
-	default:
-		// Set Unix limits on Unix systems.
+	// Set Unix system limits on Unix, skip on Windows.
+	if runtime.GOOS != "windows" {
 		var rLimit syscall.Rlimit
 		rLimit.Cur = uint64(conn + 6) // Magic. 1-5 does not work, 6 seems OK.
 		rLimit.Max = rLimit.Cur
