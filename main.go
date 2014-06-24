@@ -1,5 +1,4 @@
-/* httpstress-go is a CLI interface for httpstress library.
-Use it for stress testing of HTTP servers with many concurrent connections.
+/* httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
 
 Usage: httpstress-go -c {concurrent} -n {total} {URL list}
 e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
@@ -13,8 +12,7 @@ Prints error count for each URL to stdout (does not count successful attempts).
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
 
-Also this ulility sets `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD).
-*/
+Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD).*/
 package main
 
 /* Copyright 2014 Chai Chillum
@@ -37,31 +35,28 @@ import (
 	"github.com/chillum/httpstress"
 	"os"
 	"runtime"
-	"syscall"
 )
 
 func main() {
 	var conn, max int
 	flag.IntVar(&conn, "c", 1, "concurrent connections count")
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
+	flag.Usage = func() {
+		// TODO: stderr
+		fmt.Println("Usage:", os.Args[0], "[options] <http://url1> [http://url2] ... [http://urlN]")
+		flag.PrintDefaults()
+		fmt.Println("Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
+		fmt.Println("  godoc github.com/chillum/httpstress-go")
+		os.Exit(3)
+	}
 	flag.Parse()
-
 	urls := flag.Args()
 	if len(urls) < 1 {
-		fmt.Println("Usage:", os.Args[0], "<http://url1> [http://url2] ... [http://urlN]")
-		os.Exit(3)
+		flag.Usage()
 	}
 
 	if os.Getenv("GOMAXPROCS") == "" {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
-	}
-
-	// Set Unix system limits on Unix, skip on Windows.
-	if runtime.GOOS != "windows" {
-		var rLimit syscall.Rlimit
-		rLimit.Cur = uint64(conn + 6) // Magic. 1-5 does not work, 6 seems OK.
-		rLimit.Max = rLimit.Cur
-		syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit)
 	}
 
 	out, err := httpstress.Test(conn, max, urls)
