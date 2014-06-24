@@ -56,11 +56,17 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-	// Set Unix limits. Should be a no-op on Windows.
-	var rLimit syscall.Rlimit
-	rLimit.Cur = uint64(conn + 6) // Magic. 1-5 does not work, 6 seems OK.
-	rLimit.Max = rLimit.Cur
-	syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit)
+
+	switch runtime.GOOS {
+	case "windows", "nacl", "plan9":
+		// Skip the rlimit syscall on Windows and NaCL. Not sure about Plan 9.
+	default:
+		// Set Unix limits on Unix systems.
+		var rLimit syscall.Rlimit
+		rLimit.Cur = uint64(conn + 6) // Magic. 1-5 does not work, 6 seems OK.
+		rLimit.Max = rLimit.Cur
+		syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit)
+	}
 
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
