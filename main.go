@@ -1,22 +1,26 @@
 /* httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
 
-Usage: httpstress-go -c {concurrent} -n {total} {URL list}
-e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
+Usage: httpstress-go [options] <URL list>
 
-{concurrent} defaults to 1, {total} is optional.
+Options:
+ * `URL list` – URLs to fetch (required)
+ * `-c NUM` – concurrent connections number (defaults to 1)
+ * `-n NUM` – total connections number (optional)
+ * `-v` – print version to stdout and exit
+
+Example: httpstress-go -c 1000 http://localhost http://google.com
 
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
-Since version 2 error count is YAML-formatted. Example:
-
-errors:
-  - location: http://localhost
-    count:    334
-  - location: http://127.0.0.1
-    count:    333
+Since version 2 error output is YAML-formatted. Example:
+ errors:
+   - location: http://localhost
+     count:    334
+   - location: http://127.0.0.1
+     count:    333
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
@@ -50,14 +54,23 @@ func main() {
 	var conn, max int
 	flag.IntVar(&conn, "c", 1, "concurrent connections count")
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
+    version := flag.Bool("v", false, "print version to stdout and exit")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <http://url1> [http://url2] ... [http://urlN]")
+
+		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
+		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
 		fmt.Fprintln(os.Stderr, "  godoc github.com/chillum/httpstress-go")
 		os.Exit(3)
 	}
 	flag.Parse()
+
+    if *version {
+		fmt.Println("2.0-beta")
+		os.Exit(0)
+    }
+
 	urls := flag.Args()
 	if len(urls) < 1 {
 		flag.Usage()
@@ -70,8 +83,9 @@ func main() {
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "ERROR:", err)
-		os.Exit(3)
+		flag.Usage()
 	}
+
 	if len(out) > 0 {
 		fmt.Println("errors:")
 		for url, num := range out {

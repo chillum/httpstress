@@ -2,11 +2,6 @@
 
 httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
 
-Usage: httpstress-go -c {concurrent} -n {total} {URL list}
-e.g. httpstress-go -c 1000 -n 2000 http://localhost http://google.com
-
-{concurrent} defaults to 1, {total} is optional.
-
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
 Prints error count for each URL to stdout (does not count successful attempts).
@@ -46,12 +41,16 @@ errors:
   compiled on matching system and architecture
 
 ### Environment
-* `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
+`GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
+
+### Usage
+`httpstress-go [options] <URL list>`
 
 ### Options
+* `URL list` – URLs to fetch (required)
 * `-c NUM` – concurrent connections number (defaults to 1)
 * `-n NUM` – total connections number (optional)
-* `URL list` – URLs to fetch
+* `-v` – print version to stdout and exit
 
 ### Example usage
-`httpstress-go -c 1000 -n 2000 http://localhost http://google.com`
+`httpstress-go -c 1000 http://localhost http://google.com`
