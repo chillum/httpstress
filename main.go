@@ -10,6 +10,14 @@ Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case o
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
+Since version 2 error count is YAML-formatted. Example:
+
+errors:
+  - location: http://localhost
+    count:    334
+  - location: http://127.0.0.1
+    count:    333
+
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
 
@@ -65,9 +73,9 @@ func main() {
 		os.Exit(3)
 	}
 	if len(out) > 0 {
-		fmt.Fprintln(os.Stderr, "Test finished. Failed requests:")
+		fmt.Println("errors:")
 		for url, num := range out {
-			fmt.Print(" ", url, ": ", num, "\n")
+			fmt.Print("  - location: ", url, "\n    count:    ", num, "\n")
 		}
 		os.Exit(1)
 	} else {

@@ -32,6 +32,13 @@ Errors and debugging information go to stderr.
 
 ### Notes
 * Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD)
+* Since version 2 error count is YAML-formatted. Example:
+```yaml
+errors:
+  - location: http://localhost
+    count:    334
+  - location: http://127.0.0.1
+    count:    333```
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
   it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`
