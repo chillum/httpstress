@@ -15,7 +15,7 @@ Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case o
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
-Since version 2 error output is YAML-formatted. Example:
+Error output is YAML-formatted. Example:
  errors:
    - location: http://localhost
      count:    334
@@ -25,7 +25,9 @@ Since version 2 error output is YAML-formatted. Example:
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
 
-Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD). */
+This ulility takes care of `ulimit -n` on Unix systems
+(Mac OS X, Linux, FreeBSD): sets it to the value `-c` option plus 6,
+if the current limit is smaller. */
 package main
 
 /* Copyright 2014 Chai Chillum

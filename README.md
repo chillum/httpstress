@@ -26,6 +26,9 @@ Errors and debugging information go to stderr.
 * Ready to use: launch `httpstress-go` with desired options
 
 ### Notes
+* Since version 2 this ulility takes care of `ulimit -n` on Unix
+  systems (Mac OS X, Linux, FreeBSD): sets it to the value `-c` option plus 6,
+  if the current limit is smaller.
 * Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD)
 * Since version 2 error count is YAML-formatted. Example:
 ```yaml
