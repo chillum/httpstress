@@ -23,11 +23,7 @@ Error output is YAML-formatted. Example:
      count:    333
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
-If not, this defaults to CPU count + 1.
-
-This ulility takes care of `ulimit -n` on Unix systems
-(Mac OS X, Linux, FreeBSD): sets it to the value `-c` option plus 6,
-if the current limit is smaller. */
+If not, this defaults to CPU count + 1. */
 package main
 
 /* Copyright 2014 Chai Chillum
