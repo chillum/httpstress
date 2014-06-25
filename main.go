@@ -68,7 +68,7 @@ func main() {
 	flag.Parse()
 
     if *version {
-		fmt.Println("2.0-beta")
+		fmt.Println("2.0")
 		os.Exit(0)
     }
 
