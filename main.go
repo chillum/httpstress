@@ -50,6 +50,9 @@ import (
 	"runtime"
 )
 
+// Application version
+const Version = "2.0"
+
 func main() {
 	var conn, max int
 	flag.IntVar(&conn, "c", 1, "concurrent connections count")
@@ -68,7 +71,8 @@ func main() {
 	flag.Parse()
 
     if *version {
-		fmt.Println("2.0")
+		fmt.Println("httpstress-go", Version)
+		fmt.Println("httpstress", httpstress.Version)
 		os.Exit(0)
     }
 
