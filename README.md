@@ -10,10 +10,11 @@ Errors and debugging information go to stderr.
 ### Installation
 * If you're not a Go programmer, you may want to use pre-compiled
   binary builds, not building from source
+* Builds for v2.0 are upcoming
 * 64-bit (amd64/x86_64 only) static binary builds are provided for:
-  * [Windows](../../releases/download/v2.0/win.zip) (compiled on Windows 7 SP1)
-  * [Mac OS X](../../releases/download/v2.0/mac.zip) (compiled on a 10.8 system)
-  * [Linux](../../releases/download/v2.0/linux.tgz) (compiled on CentOS 6.5)
+  * [Windows](../../releases/download/v1.2/win.zip) (compiled on Windows 7 SP1)
+  * [Mac OS X](../../releases/download/v1.2/mac.zip) (compiled on a 10.8 system)
+  * [Linux](../../releases/download/v1.2/linux.tar.gz) (compiled on CentOS 6.5)
 * Extract the appropriate archive and launch `httpstress-go` with desired options
 
 ### Building
