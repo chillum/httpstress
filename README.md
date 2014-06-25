@@ -19,7 +19,7 @@ Errors and debugging information go to stderr.
   * [Windows](../../releases/download/v1.2/win.zip) (compiled on Windows 7 SP1)
   * [Mac OS X](../../releases/download/v1.2/mac.zip) (compiled on a 10.8 system)
   * [Linux](../../releases/download/v1.2/linux.tar.gz) (compiled on CentOS 6.5)
-* Download the appropriate file and launch `httpstress-go` with desired options
+* Extract the appropriate archive and launch `httpstress-go` with desired options
 
 ### Building
 * Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows

@@ -13,7 +13,7 @@ Errors and debugging information go to stderr.
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
 
-Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD).*/
+Be sure to set `ulimit -n` on Unix systems (Mac OS X, Linux, FreeBSD). */
 package main
 
 /* Copyright 2014 Chai Chillum
@@ -43,7 +43,6 @@ func main() {
 	flag.IntVar(&conn, "c", 1, "concurrent connections count")
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
 	flag.Usage = func() {
-		// TODO: stderr
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <http://url1> [http://url2] ... [http://urlN]")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
