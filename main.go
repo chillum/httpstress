@@ -86,6 +86,8 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
+	setlimits(&conn)
+
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "ERROR:", err)
