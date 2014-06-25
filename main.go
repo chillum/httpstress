@@ -56,12 +56,13 @@ func main() {
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
     version := flag.Bool("v", false, "print version to stdout and exit")
 	flag.Usage = func() {
-
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
 		fmt.Fprintln(os.Stderr, "  godoc github.com/chillum/httpstress-go")
+		fmt.Fprintln(os.Stderr, "Example:")
+		fmt.Fprintln(os.Stderr, "  httpstress-go -c 1000 http://localhost http://google.com")
 		os.Exit(3)
 	}
 	flag.Parse()
