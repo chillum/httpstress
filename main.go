@@ -55,7 +55,7 @@ func main() {
 	var conn, max int
 	flag.IntVar(&conn, "c", 1, "concurrent connections count")
 	flag.IntVar(&max, "n", 0, "total connections (optional)")
-    version := flag.Bool("v", false, "print version to stdout and exit")
+	version := flag.Bool("v", false, "print version to stdout and exit")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
@@ -68,12 +68,12 @@ func main() {
 	}
 	flag.Parse()
 
-    if *version {
+	if *version {
 		fmt.Println("httpstress-go", Version)
 		fmt.Println("httpstress", httpstress.Version)
 		fmt.Println("go", runtime.Version())
 		os.Exit(0)
-    }
+	}
 
 	urls := flag.Args()
 	if len(urls) < 1 {
