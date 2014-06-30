@@ -22,7 +22,7 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
 * Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
-  64-bit Go 1.3 or higher is recommended because of performance issues
+  Go 1.3 or higher on amd64 is recommended because of performance issues
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
