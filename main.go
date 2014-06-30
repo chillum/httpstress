@@ -84,7 +84,7 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-	setlimits(&conn)
+	setlimits(&conn) // Platform-specific code: see unix.go and windows.go for details.
 
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
