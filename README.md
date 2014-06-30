@@ -7,23 +7,22 @@ Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case o
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
-### Installation
+### Installing from binaries
+Extract the appropriate archive and launch `httpstress-go` with desired options
 
-* Ready-to-use utility is provided for
-  * Windows (compiled on Windows 7 SP1)
-    * [64-bit Windows](../../releases/download/v2.0.0.1/win64.zip) (recommended)
-    * [32-bit Windows](../../releases/download/v2.0.0.1/win32.zip)
-  * [Mac OS X](../../releases/download/v2.0.0.1/mac.zip) (compiled on a 10.8 system)
-  * Linux (compiled on CentOS 6.5)
-    * [64-bit Linux](../../releases/download/v2.0.0.1/linux64.tgz) (recommended)
-    * [32-bit Linux](../../releases/download/v2.0.0.1/linux32.tgz)
-* Extract the appropriate archive and launch `httpstress-go` with desired options
+* Windows (compiled on Windows 7 SP1)
+  * [64-bit Windows](../../releases/download/v2.0.0.1/win64.zip) (recommended)
+  * [32-bit Windows](../../releases/download/v2.0.0.1/win32.zip)
+* [Mac OS X](../../releases/download/v2.0.0.1/mac.zip) (compiled on a 10.8 system)
+* Linux (compiled on CentOS 6.5)
+  * [64-bit Linux](../../releases/download/v2.0.0.1/linux64.tgz) (recommended)
+  * [32-bit Linux](../../releases/download/v2.0.0.1/linux32.tgz)
 
-### Building
+### Installing from source
 * Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
-  Go 1.3 or higher on amd64 is recommended because of performance issues
+  64-bit Go 1.3 or higher is recommended because of performance issues
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * Ready to use: launch `httpstress-go` with desired options
