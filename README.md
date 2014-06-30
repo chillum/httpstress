@@ -15,34 +15,22 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
   * [32-bit Windows](../../releases/download/v2.0.0.1/win32.zip)
 * [Mac OS X](../../releases/download/v2.0.0.1/mac.zip) (compiled on a 10.8 system)
 * Linux (compiled on CentOS 6.5)
-  * [64-bit Linux](../../releases/download/v2.0.0.1/linux64.tgz) (recommended)
-  * [32-bit Linux](../../releases/download/v2.0.0.1/linux32.tgz)
+  * [x86-64 Linux](../../releases/download/v2.0.0.1/linux64.tgz) (recommended)
+  * [i386 Linux](../../releases/download/v2.0.0.1/linux32.tgz)
 
 ### Installing from source
-* Supported platforms: Unix (Mac OS X, Linux, FreeBSD) and Windows
+* Supported platforms: Unix and Windows
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
   Go 1.3 or higher on amd64 is recommended because of performance issues
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
-* Ready to use: launch `httpstress-go` with desired options
-
-### Notes
-* This ulility takes care of `ulimit -n` on Unix systems: sets it to
-  the value of `-c` option plus 6, if the current limit is smaller.
-* Error output is YAML-formatted. Example:
-```yaml
-errors:
-  - location: http://localhost
-    count:    334
-  - location: http://127.0.0.1
-    count:    333
-```
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
   it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`
   (`%GOPATH%\bin\httpstress-go.exe` on Windows),
   compiled on matching system and architecture
+* Ready to use: launch `httpstress-go` with desired options
 
 ### Environment
 `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
@@ -58,3 +46,15 @@ errors:
 
 ### Example usage
 `httpstress-go -c 1000 http://localhost http://google.com`
+
+### Notes
+* This ulility takes care of `ulimit -n` on Unix systems: sets it to
+  the value of `-c` option plus 6, if the current limit is smaller.
+* Error output is YAML-formatted. Example:
+```yaml
+errors:
+  - location: http://localhost
+    count:    334
+  - location: http://127.0.0.1
+    count:    333
+```
