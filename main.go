@@ -71,7 +71,7 @@ func main() {
 	if *version {
 		fmt.Println("httpstress-go", Version)
 		fmt.Println("httpstress", httpstress.Version)
-		fmt.Println("go", runtime.Version())
+		fmt.Println(runtime.Version())
 		fmt.Println(runtime.GOOS, runtime.GOARCH)
 		os.Exit(0)
 	}
