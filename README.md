@@ -8,12 +8,15 @@ Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
 ### Installation
-* If you're not a Go programmer, you may want to use pre-compiled
-  binary builds, not building from source
-* 64-bit (amd64/x86_64 only) static binary builds are provided for:
-  * [Windows](../../releases/download/v2.0/win.zip) (compiled on Windows 7 SP1)
-  * [Mac OS X](../../releases/download/v2.0/mac.zip) (compiled on a 10.8 system)
-  * [Linux](../../releases/download/v2.0/linux.tgz) (compiled on CentOS 6.5)
+
+* Ready-to-use utility is provided for
+  * Windows (compiled on Windows 7 SP1)
+    * [64-bit Windows](../../releases/download/v2.0.0.1/win64.zip) (recommended)
+    * [32-bit Windows](../../releases/download/v2.0.0.1/win32.zip)
+  * [Mac OS X](../../releases/download/v2.0.0.1/mac.zip) (compiled on a 10.8 system)
+  * Linux (compiled on CentOS 6.5)
+    * [64-bit Linux](../../releases/download/v2.0.0.1/linux64.tgz) (recommended)
+    * [32-bit Linux](../../releases/download/v2.0.0.1/linux32.tgz)
 * Extract the appropriate archive and launch `httpstress-go` with desired options
 
 ### Building
