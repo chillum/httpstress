@@ -49,23 +49,21 @@ task :release do
 end
 
 def build os, arch, dir
-  ENV['GOOS'] = os
-  ENV['GOARCH'] = arch.to_s
-  puts "Building #{os}_#{arch}"
-
-  if system('go install') == true
-    pack os, arch, dir, `go list -f '{{.Target}}'`
-  end
-end
-
-def pack os, arch, dir, file
   unless dir
     dir = '.'
   end
 
-  zip = system("zip -qj #{dir}/#{os}_#{arch}.zip #{file}")
+  ENV['GOOS'] = os
+  ENV['GOARCH'] = arch.to_s
 
-  if zip == true
-    puts "Wrote #{dir}/#{os}_#{arch}.zip"
+  puts "Building #{os}_#{arch}"
+  if system('go install') == true
+    zip "#{dir}/#{os}_#{arch}", `go list -f '{{.Target}}'`
+  end
+end
+
+def zip target, file
+  if system("zip -qj #{target}.zip #{file}") == true
+    puts "Wrote #{target}.zip"
   end
 end
