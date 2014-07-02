@@ -49,11 +49,7 @@ desc 'Run `go test` for the native platform'
 task :test do
   ENV['GOARCH'] = nil
   ENV['GOOS']   = nil
-
-  unless system('go test')
-    puts 'Tests failed. Exiting'
-    exit 1 # Rake returns 1 if tests for some tests fail.
-  end
+  unless system('go test'); die 'Tests' end
 end
 
 desc 'ZIP this project binaries'
@@ -76,10 +72,15 @@ def setenv os, arch
   ENV['GOOS']   = os
 end
 
+def die task
+    puts "#{task} failed. Exiting"
+    exit 1 # Rake returns 1 if something fails.
+end
+
 def build os, arch
   setenv os, arch
   puts "Building #{os}_#{arch}"
-  system('go install')
+  unless system('go install'); die 'Build' end
 end
 
 def zip os, arch, dir
