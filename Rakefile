@@ -45,15 +45,15 @@ task :build do
   }
 end
 
-desc 'Run `go test` for the platforms in build.yml'
+desc 'Run `go test` for the native platform'
 task :test do
-  config['platforms'].each { |os|
-    if os['arch'].respond_to?('each')
-      os['arch'].each { |arch| test os['name'], arch }
-    else
-      test os['name'], os['arch']
-    end
-  }
+  ENV['GOARCH'] = nil
+  ENV['GOOS']   = nil
+
+  unless system('go test')
+    puts 'Tests failed. Exiting'
+    exit 1 # Rake returns 1 if tests for some tests fail.
+  end
 end
 
 desc 'ZIP this project binaries'
@@ -80,16 +80,6 @@ def build os, arch
   setenv os, arch
   puts "Building #{os}_#{arch}"
   system('go install')
-end
-
-def test os, arch
-  setenv os, arch
-  puts "Testing #{os}_#{arch}"
-
-  unless system('go test')
-    puts 'Tests failed. Exiting'
-    exit 1 # Rake returns 1 if tests for some arch fail.
-  end
 end
 
 def zip os, arch, dir
