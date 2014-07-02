@@ -1,5 +1,4 @@
-// +build windows
-
+/* Test the setlimits() function. */
 package main
 
 /* Copyright 2014 Chai Chillum
@@ -16,7 +15,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
-// Windows has no user-tunable connection limits, so no-op here.
-func setlimits(limit *int) bool {
-	return true
+import "testing"
+
+func TestSetlimits(t *testing.T) {
+	if valid := 1024; setlimits(&valid) == false {
+		t.Errorf("setlimit(%v) didn't work", valid)
+	}
 }
