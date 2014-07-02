@@ -37,44 +37,35 @@ desc 'Build and ZIP this project for the platforms in build.yml'
 task :release do
   config = YAML.load_file 'build.yml'
 
-  host = Hash.new
-  host['arch'] = `go env GOHOSTARCH`.to_s.chomp
-  host['os'] = `go env GOOS`.chomp
-
   config['platforms'].each do |os|
     if os['arch'].respond_to?('each')
       os['arch'].each do |arch|
-        build os['name'], arch, host, config['out']
+        build os['name'], arch, config['out']
       end
     else
-      build os['name'], os['arch'], host, config['out']
+      build os['name'], os['arch'], config['out']
     end
   end
 end
 
-def build os, arch, host, out
+def build os, arch, dir
   ENV['GOOS'] = os
   ENV['GOARCH'] = arch.to_s
   puts "Building #{os}_#{arch}"
 
   if system('go install') == true
-    pack os, arch, host, out, `go list -f '{{.Target}}'`
+    pack os, arch, dir, `go list -f '{{.Target}}'`
   end
 end
 
-def pack os, arch, host, out, file
-  unless out
-    out = '.'
+def pack os, arch, dir, file
+  unless dir
+    dir = '.'
   end
 
-  if host['os'] == os and host['arch'] == arch
-    dir = "#{ENV['GOPATH']}/bin"
-  else
-    dir = "#{ENV['GOPATH']}/bin/#{os}_#{arch}"
-  end
+  zip = system("zip -qj #{dir}/#{os}_#{arch}.zip #{file}")
 
-  zip = system("zip -qj #{out}/#{os}_#{arch}.zip #{file}")
   if zip == true
-    puts "Wrote #{out}/#{os}_#{arch}.zip"
+    puts "Wrote #{dir}/#{os}_#{arch}.zip"
   end
 end
