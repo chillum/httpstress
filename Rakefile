@@ -32,7 +32,7 @@
 # limitations under the License.
 
 require 'yaml'
-config = YAML.load_file 'build.yml'
+config = YAML.load_file 'build.yml' # Rake fails to run on problems with config file.
 
 desc 'Build this project for the platforms in build.yml'
 task :build do
@@ -47,7 +47,7 @@ task :build do
   end
 end
 
-desc 'Run `go test` for the platforms in build.yml.'
+desc 'Run `go test` for the platforms in build.yml'
 task :test do
   config['platforms'].each do |os|
     if os['arch'].respond_to?('each')
@@ -60,7 +60,7 @@ task :test do
   end
 end
 
-desc 'ZIP this project binaries.'
+desc 'ZIP this project binaries'
 task :zip => [:build, :test] do
   unless config['out']
     config['out'] = '.'
@@ -80,8 +80,8 @@ task :zip => [:build, :test] do
 end
 
 def setenv os, arch
-  ENV['GOOS'] = os
   ENV['GOARCH'] = arch.to_s
+  ENV['GOOS']   = os
 end
 
 def build os, arch
@@ -96,6 +96,7 @@ def test os, arch
 
   puts "Testing #{os}_#{arch}"
   if system('go test') != true
+    puts 'Tests failed. Exiting'
     exit 1 # Rake returns 1 if tests for some arch fail.
   end
 end
