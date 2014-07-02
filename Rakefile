@@ -78,15 +78,14 @@ end
 
 def build os, arch
   setenv os, arch
-
   puts "Building #{os}_#{arch}"
   system('go install')
 end
 
 def test os, arch
   setenv os, arch
-
   puts "Testing #{os}_#{arch}"
+
   unless system('go test')
     puts 'Tests failed. Exiting'
     exit 1 # Rake returns 1 if tests for some arch fail.
