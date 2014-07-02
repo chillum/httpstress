@@ -36,28 +36,24 @@ config = YAML.load_file 'build.yml' # Rake fails to run on problems with config 
 
 desc 'Build this project for the platforms in build.yml'
 task :build do
-  config['platforms'].each do |os|
+  config['platforms'].each { |os|
     if os['arch'].respond_to?('each')
-      os['arch'].each do |arch|
-        build os['name'], arch
-      end
+      os['arch'].each { |arch| build os['name'], arch }
     else
       build os['name'], os['arch']
     end
-  end
+  }
 end
 
 desc 'Run `go test` for the platforms in build.yml'
 task :test do
-  config['platforms'].each do |os|
+  config['platforms'].each { |os|
     if os['arch'].respond_to?('each')
-      os['arch'].each do |arch|
-        test os['name'], arch
-      end
+      os['arch'].each { |arch| test os['name'], arch }
     else
       test os['name'], os['arch']
     end
-  end
+  }
 end
 
 desc 'ZIP this project binaries'
@@ -66,15 +62,13 @@ task :zip => [:build, :test] do
     config['out'] = '.' # Default to the current directory, if 'out' is not specified.
   end
 
-  config['platforms'].each do |os|
+  config['platforms'].each { |os|
     if os['arch'].respond_to?('each')
-      os['arch'].each do |arch|
-        zip os['name'], arch, config['out']
-      end
+      os['arch'].each { |arch| zip os['name'], arch, config['out'] }
     else
-        zip os['name'], os['arch'], config['out']
+      zip os['name'], os['arch'], config['out']
     end
-  end
+  }
 end
 
 def setenv os, arch
