@@ -63,18 +63,16 @@ end
 desc 'ZIP this project binaries'
 task :zip => [:build, :test] do
   unless config['out']
-    config['out'] = '.'
+    config['out'] = '.' # Default to the current directory, if 'out' is not specified.
   end
 
   config['platforms'].each do |os|
     if os['arch'].respond_to?('each')
       os['arch'].each do |arch|
-        setenv os['name'], arch
-        zip "#{config['out']}/#{os['name']}_#{arch}", `go list -f '{{.Target}}'`
+        zip os['name'], arch, config['out']
       end
     else
-        setenv os['name'], os['arch']
-        zip "#{config['out']}/#{os['name']}_#{os['arch']}", `go list -f '{{.Target}}'`
+        zip os['name'], os['arch'], config['out']
     end
   end
 end
@@ -101,8 +99,10 @@ def test os, arch
   end
 end
 
-def zip target, file
-  if system("zip -qj #{target}.zip #{file}") == true
-    puts "Wrote #{target}.zip"
+def zip os, arch, dir
+  setenv os, arch
+
+  if system("zip -qj #{dir}/#{os}_#{arch}.zip #{`go list -f '{{.Target}}'`}") == true
+    puts "Wrote #{dir}/#{os}_#{arch}.zip"
   end
 end
