@@ -85,7 +85,6 @@ end
 
 def zip os, arch, dir
   setenv os, arch
-
   if system("zip -qj #{dir}/#{os}_#{arch}.zip #{`go list -f '{{.Target}}'`}")
     puts "Wrote #{dir}/#{os}_#{arch}.zip"
   end
