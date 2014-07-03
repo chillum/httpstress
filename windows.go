@@ -17,6 +17,5 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 // Windows has no user-tunable connection limits, so no-op here.
-func setlimits(limit *int) bool {
-	return true
+func setlimits(limit *int) {
 }
