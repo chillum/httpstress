@@ -1,6 +1,7 @@
-/* httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
+/* CLI utility for stress testing of HTTP servers with many concurrent connections
 
-Usage: httpstress-go [options] <URL list>
+Usage:
+ httpstress-go [options] <URL list>
 
 Options:
  * `URL list` – URLs to fetch (required)
@@ -8,7 +9,8 @@ Options:
  * `-n NUM` – total connections number (optional)
  * `-v` – print version to stdout and exit
 
-Example: httpstress-go -c 1000 http://localhost https://google.com
+Example:
+ httpstress-go -c 1000 http://localhost https://google.com
 
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
