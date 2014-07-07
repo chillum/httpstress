@@ -11,12 +11,12 @@ Errors and debugging information go to stderr.
 Extract the appropriate archive and launch `httpstress-go` with desired options
 
 * Windows
-  * [64-bit Windows](../../releases/download/v2.0.1/win64.zip) (recommended)
-  * [32-bit Windows](../../releases/download/v2.0.1/win32.zip)
-* [Mac OS X](../../releases/download/v2.0.1/mac.zip) (10.7 or greater)
+  * [64-bit Windows](../../releases/download/v2.1/windows_amd64.zip) (recommended)
+  * [32-bit Windows](../../releases/download/v2.1/windows_386.zip)
+* [Mac OS X](../../releases/download/v2.1/darwin_amd64.zip) (10.7 or greater)
 * Linux
-  * [x86-64 Linux](../../releases/download/v2.0.1/linux64.tgz) (recommended)
-  * [i386 Linux](../../releases/download/v2.0.1/linux32.tgz)
+  * [x86-64 Linux](../../releases/download/v2.1/linux_amd64.zip) (recommended)
+  * [i386 Linux](../../releases/download/v2.1/linux_386.zip)
 
 ### Installing from source
 * Supported platforms: Unix and Windows
