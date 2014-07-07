@@ -8,7 +8,7 @@ Options:
  * `-n NUM` – total connections number (optional)
  * `-v` – print version to stdout and exit
 
-Example: httpstress-go -c 1000 http://localhost http://google.com
+Example: httpstress-go -c 1000 http://localhost https://google.com
 
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
@@ -49,7 +49,7 @@ import (
 )
 
 // Application version
-const Version = "2.0.1"
+const Version = "2.1"
 
 func main() {
 	var conn, max int
@@ -63,7 +63,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
 		fmt.Fprintln(os.Stderr, "  godoc github.com/chillum/httpstress-go")
 		fmt.Fprintln(os.Stderr, "Example:")
-		fmt.Fprintln(os.Stderr, "  httpstress-go -c 1000 http://localhost http://google.com")
+		fmt.Fprintln(os.Stderr, "  httpstress-go -c 1000 http://localhost https://google.com")
 		os.Exit(3)
 	}
 	flag.Parse()

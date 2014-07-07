@@ -45,7 +45,7 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
 * `-v` – print version to stdout and exit
 
 ### Example usage
-`httpstress-go -c 1000 http://localhost http://google.com`
+`httpstress-go -c 1000 http://localhost https://google.com`
 
 ### Notes
 * This ulility takes care of `ulimit -n` on Unix systems: sets it to
