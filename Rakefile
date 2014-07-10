@@ -47,8 +47,7 @@ end
 
 desc 'Run `go test` for the native platform'
 task :test do
-  ENV['GOARCH'] = nil
-  ENV['GOOS']   = nil
+  setenv nil, nil
   unless system('go test'); die 'Tests' end
 end
 
@@ -68,7 +67,7 @@ task :zip => [:build, :test] do
 end
 
 def setenv os, arch
-  ENV['GOARCH'] = arch.to_s
+  ENV['GOARCH'] = arch ? arch.to_s : nil
   ENV['GOOS']   = os
 end
 
