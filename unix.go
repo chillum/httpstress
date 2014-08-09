@@ -5,7 +5,7 @@
 // Warns on stderr upon errors.
 package main
 
-/* Copyright 2014 Chai Chillum
+/* Copyright 2014 Vasily Korytov
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
