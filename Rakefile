@@ -17,7 +17,7 @@
 # Please note that if 'out' is specified, ZIP files will appear in the specified directory;
 # if not, they will be in current directory.
 
-# Copyright 2014 Chai Chillum
+# Copyright 2014 Vasily Korytov
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,38 +32,43 @@
 # limitations under the License.
 
 require 'yaml'
-config = YAML.load_file 'build.yml' # Rake fails to run on problems with config file.
+begin
+  config = YAML.load_file 'build.yml'
 
-desc 'Build this project for the platforms in build.yml'
-task :build do
-  config['platforms'].each { |os|
-    if os['arch'].respond_to?('each')
-      os['arch'].each { |arch| build os['name'], arch }
-    else
-      build os['name'], os['arch']
+  desc 'Build this project for the platforms in build.yml'
+  task :build do
+    config['platforms'].each { |os|
+      if os['arch'].respond_to?('each')
+        os['arch'].each { |arch| build os['name'], arch }
+      else
+        build os['name'], os['arch']
+      end
+    }
+  end
+
+  desc 'ZIP this project binaries'
+  task :zip => [:build, :test] do
+    unless config['out']
+      config['out'] = '.' # Default to the current directory, if 'out' is not specified.
     end
-  }
+
+    config['platforms'].each { |os|
+      if os['arch'].respond_to?('each')
+        os['arch'].each { |arch| zip os['name'], arch, config['out'], os['zip'] ? \
+          "#{os['zip']}_#{arch}" : "#{os['name']}_#{arch}" }
+      else
+        zip os['name'], os['arch'], config['out'], os['zip'] || "#{os['name']}_#{os['arch']}"
+      end
+    }
+  end
+rescue Errno::ENOENT, Errno::EACCES
+  puts 'Warning: unable to load build.yml. Disabling `build` and `zip` tasks.'
 end
 
 desc 'Run `go test` for the native platform'
 task :test do
   setenv nil, nil
   unless system('go test'); die 'Tests' end
-end
-
-desc 'ZIP this project binaries'
-task :zip => [:build, :test] do
-  unless config['out']
-    config['out'] = '.' # Default to the current directory, if 'out' is not specified.
-  end
-
-  config['platforms'].each { |os|
-    if os['arch'].respond_to?('each')
-      os['arch'].each { |arch| zip os['name'], arch, config['out'] }
-    else
-      zip os['name'], os['arch'], config['out']
-    end
-  }
 end
 
 def setenv os, arch
@@ -82,10 +87,10 @@ def build os, arch
   unless system('go install'); die 'Build' end
 end
 
-def zip os, arch, dir
+def zip os, arch, dir, file
   setenv os, arch
 
-  if system("zip -qj #{dir}/#{os}_#{arch}.zip #{`go list -f '{{.Target}}'`}")
-    puts "Wrote #{dir}/#{os}_#{arch}.zip"
+  if system("zip -qj #{dir}/#{file}.zip #{`go list -f '{{.Target}}'`}")
+    puts "Wrote #{dir}/#{file}.zip"
   end
 end
