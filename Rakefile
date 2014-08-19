@@ -32,6 +32,7 @@
 # limitations under the License.
 
 require 'yaml'
+
 begin
   config = YAML.load_file 'build.yml'
 

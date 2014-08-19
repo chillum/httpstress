@@ -97,7 +97,7 @@ func main() {
 	if len(out) > 0 {
 		fmt.Println("errors:")
 		for url, num := range out {
-			fmt.Print("  - location: ", url, "\n    count:    ", num, "\n")
+			fmt.Println("  - location: ", url, "\n    count:    ", num)
 		}
 		os.Exit(1)
 	} else {
