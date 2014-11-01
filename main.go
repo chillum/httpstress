@@ -1,7 +1,5 @@
 /* CLI utility for stress testing of HTTP servers with many concurrent connections
 
-https://github.com/chillum/httpstress-go
-
 Usage:
  httpstress-go [options] <URL list>
 
@@ -64,7 +62,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "Docs:\n  https://godoc.org/github.com/chillum/httpstress-go")
+		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress-go")
 		fmt.Fprintln(os.Stderr, "Example:\n  httpstress-go -c 1000 http://localhost https://google.com")
 		os.Exit(3)
 	}
