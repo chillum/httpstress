@@ -1,6 +1,6 @@
 // +build !windows
 
-/* Test the setlimits() function. */
+// Test the setlimits() function.
 package main
 
 import "testing"
