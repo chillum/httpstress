@@ -29,21 +29,21 @@ If not, this defaults to CPU count + 1. */
 package main
 
 import (
-	"flag"
 	"fmt"
 	"github.com/chillum/httpstress"
+	flag "github.com/ogier/pflag"
 	"os"
 	"runtime"
 )
 
 // Application version
-const Version = "2.1"
+const Version = "2.2"
 
 func main() {
 	var conn, max int
-	flag.IntVar(&conn, "c", 1, "concurrent connections count")
-	flag.IntVar(&max, "n", 0, "total connections (optional)")
-	version := flag.Bool("v", false, "print version to stdout and exit")
+	flag.IntVarP(&conn, "c", "c", 1, "concurrent connections count")
+	flag.IntVarP(&max, "n" ,"n", 0, "total connections (optional)")
+	version := flag.BoolP("version", "v", false, "print version to stdout and exit")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
