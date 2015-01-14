@@ -1,7 +1,7 @@
 /* CLI utility for stress testing of HTTP servers with many concurrent connections
 
 Usage:
- httpstress-go [options] <URL list>
+ httpstress-go <URL list> [options]
 
 Options:
  * `URL list` – URLs to fetch (required)
@@ -10,7 +10,7 @@ Options:
  * `-v` – print version to stdout and exit
 
 Example:
- httpstress-go -c 1000 http://localhost https://google.com
+ httpstress-go http://localhost https://google.com -c 1000
 
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
 
@@ -45,11 +45,11 @@ func main() {
 	flag.IntVarP(&max, "n" ,"n", 0, "total connections (optional)")
 	version := flag.BoolP("version", "v", false, "print version to stdout and exit")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>")
+		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress-go")
-		fmt.Fprintln(os.Stderr, "Example:\n  httpstress-go -c 1000 http://localhost https://google.com")
+		fmt.Fprintln(os.Stderr, "Example:\n  httpstress-go http://localhost https://google.com -c 1000")
 		os.Exit(3)
 	}
 	flag.Parse()

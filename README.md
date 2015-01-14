@@ -36,7 +36,7 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
 `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
 
 ### Usage
-`httpstress-go [options] <URL list>`
+`httpstress-go <URL list> [options]`
 
 ### Options
 * `URL list` – URLs to fetch (required)
@@ -45,7 +45,7 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
 * `-v` – print version to stdout and exit
 
 ### Example usage
-`httpstress-go -c 1000 http://localhost https://google.com`
+`httpstress-go http://localhost https://google.com -c 1000`
 
 ### Notes
 * This ulility takes care of `ulimit -n` on Unix systems: sets it to
