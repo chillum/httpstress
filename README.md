@@ -1,9 +1,9 @@
 ## httpstress-go [![Build Status](https://travis-ci.org/chillum/httpstress-go.svg?branch=master)](https://travis-ci.org/chillum/httpstress-go)
 
-httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
+CLI utility for stress testing of HTTP servers with many concurrent connections.
 
-Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill, 3 in case of invalid options
-and 4 if it encounters a `setrlimit(2)`/`getrlimit(2)` error.
+Returns `0` if no errors, `1` if some failed (see stdout), `2` on kill, `3` in case of invalid options
+and `4` if it encounters a `setrlimit(2)`/`getrlimit(2)` error.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
@@ -23,14 +23,14 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
 * Supported platforms: Unix and Windows
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
-  Go 1.3 or higher on amd64 is recommended because of performance issues
+  Go 1.3.3 on amd64 is recommended because of performance issues
 * Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress-go`
 * `httpstress-go` is
   [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
   it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`
   (`%GOPATH%\bin\httpstress-go.exe` on Windows),
-  compiled on matching system and architecture
+  compiled for matching system and architecture
 * Ready to use: launch `httpstress-go` with desired options
 
 ### Environment
