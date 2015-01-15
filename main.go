@@ -12,7 +12,8 @@ Options:
 Example:
  httpstress-go http://localhost https://google.com -c 1000
 
-Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
+Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill, 3 in case of invalid options
+and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
@@ -37,7 +38,7 @@ import (
 )
 
 // Application version
-const Version = "2.2"
+const Version = "2.3"
 
 func main() {
 	var conn, max int
@@ -70,7 +71,9 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
 	}
 
-	setlimits(&conn) // Platform-specific code: see unix.go and windows.go for details.
+	if !setlimits(&conn) { // Platform-specific code: see unix.go and windows.go for details.
+		os.Exit(4)
+	}
 
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {

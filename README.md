@@ -2,7 +2,8 @@
 
 httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
 
-Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill and 3 in case of invalid options.
+Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill, 3 in case of invalid options
+and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.

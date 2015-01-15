@@ -1,5 +1,3 @@
-// +build !windows
-
 // Test the setlimits() function.
 package main
 
