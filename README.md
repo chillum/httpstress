@@ -3,7 +3,7 @@
 httpstress-go is a CLI utility for stress testing of HTTP servers with many concurrent connections.
 
 Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill, 3 in case of invalid options
-and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
+and 4 if it encounters a `setrlimit(2)`/`getrlimit(2)` error.
 
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
@@ -12,12 +12,12 @@ Errors and debugging information go to stderr.
 Extract the appropriate archive and launch `httpstress-go` with desired options
 
 * Windows
-  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.2/win64.zip) (recommended)
-  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.2/win32.zip)
-* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v2.2/mac.zip) (10.7 or greater)
+  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.3/win64.zip) (recommended)
+  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.3/win32.zip)
+* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v2.3/mac.zip) (10.7 or greater)
 * Linux
-  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.2/linux_amd64.zip) (recommended)
-  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.2/linux_386.zip)
+  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.3/linux_amd64.zip) (recommended)
+  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.3/linux_386.zip)
 
 ### Installing from source
 * Supported platforms: Unix and Windows
