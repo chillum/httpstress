@@ -1,4 +1,5 @@
-/* CLI utility for stress testing of HTTP servers with many concurrent connections
+/*
+CLI utility for stress testing of HTTP servers with many concurrent connections
 
 Usage:
  httpstress-go <URL list> [options]
@@ -26,7 +27,8 @@ Error output is YAML-formatted. Example:
      count:    333
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
-If not, this defaults to CPU count + 1. */
+If not, this defaults to CPU count + 1.
+*/
 package main
 
 import (
