@@ -23,9 +23,9 @@ Output is YAML-formatted. Example:
  Errors:
    - Location: http://localhost
      Count:    334
-   - Location: http://127.0.0.1
+   - Location: https://127.0.0.1
      Count:    333
- Elapsed time: 6.791903888s
+ Elapsed time: 4.791903888s
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.

@@ -10,9 +10,9 @@ Produces YAML-formatted output like:
 Errors:
   - Location: http://localhost
     Count:    334
-  - Location: http://127.0.0.1
+  - Location: https://127.0.0.1
     Count:    333
-Elapsed time: 6.791903888s
+Elapsed time: 4.791903888s
 ```
 
 #### Install: [source code](https://github.com/chillum/httpstress-go/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress-go/wiki/Installing-from-binaries) (recommended) 
