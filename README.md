@@ -15,6 +15,6 @@ Errors:
 Elapsed time: 4.791903888s
 ```
 
-#### Install: [source code](https://github.com/chillum/httpstress-go/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress-go/wiki/Installing-from-binaries) (recommended) 
+#### Install: [source code](https://github.com/chillum/httpstress-go/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress-go/wiki/Installing-from-binaries)
 
 #### Use: check out [the user manual](https://github.com/chillum/httpstress-go/wiki#httpstress-go)
