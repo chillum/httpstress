@@ -37,15 +37,16 @@ import (
 	flag "github.com/ogier/pflag"
 	"os"
 	"runtime"
+	"time"
 )
 
 // Application version
-const Version = "2.3"
+const Version = "2.4"
 
 func main() {
 	var conn, max int
 	flag.IntVarP(&conn, "c", "c", 1, "concurrent connections count")
-	flag.IntVarP(&max, "n" ,"n", 0, "total connections (optional)")
+	flag.IntVarP(&max, "n", "n", 0, "total connections (optional)")
 	version := flag.BoolP("version", "v", false, "print version to stdout and exit")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
@@ -77,19 +78,24 @@ func main() {
 		os.Exit(4)
 	}
 
+	start := time.Now()
+
 	out, err := httpstress.Test(conn, max, urls)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "ERROR:", err)
 		flag.Usage()
 	}
 
+	elapsed := time.Since(start)
+
 	if len(out) > 0 {
 		fmt.Println("errors:")
 		for url, num := range out {
 			fmt.Println("  - location: ", url, "\n    count:    ", num)
 		}
-		os.Exit(1)
+		defer os.Exit(1)
 	} else {
 		fmt.Fprintln(os.Stderr, "Test finished. No failed requests.")
 	}
+	fmt.Fprintln(os.Stderr, "Elapsed time:", elapsed)
 }

@@ -8,30 +8,18 @@ and `4` if it encounters a `setrlimit(2)`/`getrlimit(2)` error.
 Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
+### [Installing from source](https://github.com/chillum/httpstress-go/wiki/Building-from-source)
+
 ### Installing from binaries
 Extract the appropriate archive and launch `httpstress-go` with desired options
 
 * Windows
-  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.3/win64.zip) (recommended)
-  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.3/win32.zip)
-* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v2.3/mac.zip) (10.7 or greater)
+  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.4/win64.zip) (recommended)
+  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.4/win32.zip)
+* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v2.4/mac.zip) (10.7 or greater)
 * Linux
-  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.3/linux_amd64.zip) (recommended)
-  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.3/linux_386.zip)
-
-### Installing from source
-* Supported platforms: Unix and Windows
-* Install [Git](http://git-scm.com/download)
-* Install [Go runtime](http://golang.org/doc/install).
-  Go 1.3.3 on amd64 is recommended because of performance issues
-* Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
-* `go get github.com/chillum/httpstress-go`
-* `httpstress-go` is
-  [a static-linked binary](http://golang.org/doc/faq#Why_is_my_trivial_program_such_a_large_binary),
-  it's possible to deploy it just by copying `$GOPATH/bin/httpstress-go`
-  (`%GOPATH%\bin\httpstress-go.exe` on Windows),
-  compiled for matching system and architecture
-* Ready to use: launch `httpstress-go` with desired options
+  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.4/linux_amd64.zip) (recommended)
+  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.4/linux_386.zip)
 
 ### Environment
 `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
