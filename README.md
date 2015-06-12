@@ -46,4 +46,5 @@ Errors:
     Count:    334
   - Location: http://127.0.0.1
     Count:    333
+Elapsed time: 6.791903888s
 ```

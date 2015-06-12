@@ -25,6 +25,7 @@ Error output is YAML-formatted. Example:
      Count:    334
    - Location: http://127.0.0.1
      Count:    333
+ Elapsed time: 6.791903888s
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
@@ -97,5 +98,5 @@ func main() {
 	} else {
 		fmt.Fprintln(os.Stderr, "Test finished. No failed requests.")
 	}
-	fmt.Fprintln(os.Stderr, "Elapsed time:", elapsed)
+	fmt.Println("Elapsed time:", elapsed)
 }
