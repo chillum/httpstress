@@ -53,7 +53,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress-go")
+		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress-go/wiki")
 		fmt.Fprintln(os.Stderr, "Example:\n  httpstress-go http://localhost https://google.com -c 1000")
 		os.Exit(3)
 	}
