@@ -20,11 +20,11 @@ Prints error count for each URL to stdout (does not count successful attempts).
 Errors and debugging information go to stderr.
 
 Error output is YAML-formatted. Example:
- errors:
-   - location: http://localhost
-     count:    334
-   - location: http://127.0.0.1
-     count:    333
+ Errors:
+   - Location: http://localhost
+     Count:    334
+   - Location: http://127.0.0.1
+     Count:    333
 
 Please note that this utility uses GOMAXPROCS environment variable if it's present.
 If not, this defaults to CPU count + 1.
@@ -41,7 +41,7 @@ import (
 )
 
 // Application version
-const Version = "2.4"
+const Version = "3.0"
 
 func main() {
 	var conn, max int
@@ -89,9 +89,9 @@ func main() {
 	elapsed := time.Since(start)
 
 	if len(out) > 0 {
-		fmt.Println("errors:")
+		fmt.Println("Errors:")
 		for url, num := range out {
-			fmt.Println("  - location: ", url, "\n    count:    ", num)
+			fmt.Println("  - Location:", url, "\n    Count:   ", num)
 		}
 		defer os.Exit(1)
 	} else {

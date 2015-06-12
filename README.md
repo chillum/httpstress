@@ -14,12 +14,12 @@ Errors and debugging information go to stderr.
 Extract the appropriate archive and launch `httpstress-go` with desired options
 
 * Windows
-  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.4/win64.zip) (recommended)
-  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v2.4/win32.zip)
-* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v2.4/mac.zip) (10.7 or greater)
+  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v3.0/win64.zip) (recommended)
+  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v3.0/win32.zip)
+* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v3.0/mac.zip) (10.7 or greater)
 * Linux
-  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.4/linux_amd64.zip) (recommended)
-  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v2.4/linux_386.zip)
+  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v3.0/linux_amd64.zip) (recommended)
+  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v3.0/linux_386.zip)
 
 ### Environment
 `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
@@ -41,9 +41,9 @@ Extract the appropriate archive and launch `httpstress-go` with desired options
   the value of `-c` option plus 6, if the current limit is smaller.
 * Error output is YAML-formatted. Example:
 ```yaml
-errors:
-  - location: http://localhost
-    count:    334
-  - location: http://127.0.0.1
-    count:    333
+Errors:
+  - Location: http://localhost
+    Count:    334
+  - Location: http://127.0.0.1
+    Count:    333
 ```
