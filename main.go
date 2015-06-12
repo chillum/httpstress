@@ -13,13 +13,13 @@ Options:
 Example:
  httpstress-go http://localhost https://google.com -c 1000
 
-Returns 0 if no errors, 1 if some failed (see stdout), 2 on kill, 3 in case of invalid options
+Returns 0 if no errors, 1 if some requests failed, 2 on kill, 3 in case of invalid options
 and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
 
-Prints error count for each URL to stdout (does not count successful attempts).
-Errors and debugging information go to stderr.
+Prints elapsed time and error count for each URL to stdout (if any; does not count successful attempts).
+Usage and runtime errors go to stderr.
 
-Error output is YAML-formatted. Example:
+Output is YAML-formatted. Example:
  Errors:
    - Location: http://localhost
      Count:    334
@@ -42,7 +42,7 @@ import (
 )
 
 // Application version
-const Version = "3.0"
+const Version = "3.1"
 
 func main() {
 	var conn, max int
@@ -95,8 +95,6 @@ func main() {
 			fmt.Println("  - Location:", url, "\n    Count:   ", num)
 		}
 		defer os.Exit(1)
-	} else {
-		fmt.Fprintln(os.Stderr, "Test finished. No failed requests.")
 	}
 	fmt.Println("Elapsed time:", elapsed)
 }
