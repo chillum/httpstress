@@ -8,18 +8,7 @@ and `4` if it encounters a `setrlimit(2)`/`getrlimit(2)` error.
 Prints elapsed time and error count for each URL to stdout (if any; does not count successful attempts).
 Usage and runtime errors go to stderr.
 
-### [Installing from source](https://github.com/chillum/httpstress-go/wiki/Building-from-source)
-
-### Installing from binaries
-Extract the appropriate archive and launch `httpstress-go` with desired options
-
-* Windows
-  * [64-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v3.1/win64.zip) (recommended)
-  * [32-bit Windows](https://github.com/chillum/httpstress-go/releases/download/v3.1/win32.zip)
-* [Mac OS X](https://github.com/chillum/httpstress-go/releases/download/v3.1/mac.zip) (10.7 or greater)
-* Linux
-  * [x86-64 Linux](https://github.com/chillum/httpstress-go/releases/download/v3.1/linux_amd64.zip) (recommended)
-  * [i386 Linux](https://github.com/chillum/httpstress-go/releases/download/v3.1/linux_386.zip)
+#### Install: [source code](https://github.com/chillum/httpstress-go/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress-go/wiki/Installing-from-binaries) (recommended) 
 
 ### Environment
 `GOMAXPROCS` – Go threads number (defaults to CPU count + 1)
