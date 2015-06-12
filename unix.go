@@ -2,7 +2,6 @@
 
 // This ulility takes care of `ulimit -n` on Unix systems: sets it to
 // the value of `-c` option plus 6, if the current limit is smaller.
-// Warns on stderr upon errors.
 package main
 
 import (
