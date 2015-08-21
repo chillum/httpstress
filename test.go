@@ -33,7 +33,7 @@ Returns map: {url}, {fail count} or error (failed URL message). Example:
 func Test(conn int, max int, urls []string) (results map[string]int, err error) {
 	for _, i := range urls {
 		if !strings.HasPrefix(i, "http://") && !strings.HasPrefix(i, "https://") {
-			err = errors.New("Not a HTTP/HTTPS URL: " + i)
+			err = errors.New("Not a HTTP(S) URL: " + i)
 			return
 		}
 	}

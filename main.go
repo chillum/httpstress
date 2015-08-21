@@ -81,7 +81,7 @@ func main() {
 
 	out, err := Test(conn, max, urls)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "ERROR:", err)
+		fmt.Fprintln(os.Stderr, "Error:", err)
 		flag.Usage()
 	}
 
