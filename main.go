@@ -34,7 +34,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/chillum/httpstress"
 	flag "github.com/ogier/pflag"
 	"os"
 	"runtime"
@@ -61,7 +60,6 @@ func main() {
 
 	if *version {
 		fmt.Println("httpstress-go", Version)
-		fmt.Println("httpstress", httpstress.Version)
 		fmt.Println(runtime.Version(), runtime.GOOS, runtime.GOARCH)
 		os.Exit(0)
 	}
@@ -81,7 +79,7 @@ func main() {
 
 	start := time.Now()
 
-	out, err := httpstress.Test(conn, max, urls)
+	out, err := Test(conn, max, urls)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "ERROR:", err)
 		flag.Usage()
