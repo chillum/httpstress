@@ -38,23 +38,20 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 		}
 	}
 
-	results = make(map[string]int)
-	failures := make(chan string)
-	finished := make(chan bool)
-	total := len(urls) - 1
-	trans := &http.Transport{MaxIdleConnsPerHost: conn} // Use persistent connections.
-	client := &http.Client{Transport: trans}
-	n := 0
-	i := 0
-
 	// Ensure, every URL gets a request.
 	if max < len(urls) {
 		max = len(urls)
 	}
 
-	go logger(failures, results)
+	results = make(map[string]int)
+	finished := make(chan string)
+	total := len(urls) - 1
+	trans := &http.Transport{MaxIdleConnsPerHost: conn} // Use persistent connections.
+	client := &http.Client{Transport: trans}
+	n := 0
+	i := 0
 	for ; i < conn; i++ { // Launch initial workers.
-		go worker(&urls[n], failures, finished, client)
+		go worker(&urls[n], finished, client)
 
 		if n < total {
 			n++
@@ -63,38 +60,34 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 		}
 	}
 	for ; i < max; i++ { // Launch more workers as initial finish.
-		if <-finished {
-			go worker(&urls[n], failures, finished, client)
+		if url := <-finished; url != "" {
+			results[url]++
+		}
 
-			if n < total {
-				n++
-			} else {
-				n = 0
-			}
+		go worker(&urls[n], finished, client)
+
+		if n < total {
+			n++
+		} else {
+			n = 0
 		}
 	}
 	for i := 0; i < conn; i++ { // Wait for active workers.
-		<-finished
+		if url := <-finished; url != "" {
+			results[url]++
+		}
 	}
 	return
 }
 
-func logger(failures <-chan string, results map[string]int) {
-	for {
-		select {
-		case url := <-failures:
-			results[url]++
-		}
-	}
-}
-
-func worker(url *string, failures chan<- string, finished chan<- bool, client *http.Client) {
+func worker(url *string, finished chan<- string, client *http.Client) {
 	resp, err := client.Get(*url)
 	if err != nil {
-		failures <- *url
+		finished <- *url
+	} else {
+		finished <- ""
 	}
 	if resp != nil {
 		resp.Body.Close()
 	}
-	finished <- true
 }
