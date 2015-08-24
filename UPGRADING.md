@@ -5,6 +5,6 @@
 * Delete `$GOPATH/src/chillum/httpstress`
 * Rename `$GOPATH/src/chillum/httpstress-go` to `$GOPATH/src/chillum/httpstress`
 
-## Upgrading from httpstress < 1.3
+## Upgrading from httpstress < 1.4
 
 Change the import path from `"github.com/chillum/httpstress"` to `"github.com/chillum/httpstress/lib"`

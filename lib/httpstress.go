@@ -14,7 +14,7 @@ import (
 )
 
 // Library version
-const Version = "1.3"
+const Version = "1.4"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
