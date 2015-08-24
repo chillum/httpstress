@@ -1,4 +1,4 @@
-httpstress-go: https://github.com/chillum/httpstress-go
+httpstress: https://github.com/chillum/httpstress
 
 Copyright 2014-2015 Vasily Korytov
 

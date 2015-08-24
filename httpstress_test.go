@@ -2,7 +2,7 @@
 package main
 
 import (
-	"github.com/chillum/httpstress-go/lib"
+	"github.com/chillum/httpstress/lib"
 	"testing"
 )
 

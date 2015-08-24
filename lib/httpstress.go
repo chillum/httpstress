@@ -3,7 +3,7 @@ Package httpstress is a library for HTTP stress testing
 
 It launches one goroutine per concurrent connection and does not count successful attempts.
 
-A CLI utility is avaliable at github.com/chillum/httpstress-go
+A CLI utility is avaliable at github.com/chillum/httpstress
 */
 package httpstress
 

@@ -2,7 +2,7 @@
 CLI utility for stress testing of HTTP servers with many concurrent connections
 
 Usage:
- httpstress-go <URL list> [options]
+ httpstress <URL list> [options]
 
 Options:
  * `URL list` – URLs to fetch (required)
@@ -11,7 +11,7 @@ Options:
  * `-v` – print version to stdout and exit
 
 Example:
- httpstress-go http://localhost https://google.com -c 1000
+ httpstress http://localhost https://google.com -c 1000
 
 Returns 0 if no errors, 1 if some requests failed, 2 on kill, 3 in case of invalid options
 and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
@@ -34,7 +34,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/chillum/httpstress-go/lib"
+	"github.com/chillum/httpstress/lib"
 	flag "github.com/ogier/pflag"
 	"os"
 	"runtime"
@@ -53,15 +53,15 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress-go/wiki")
-		fmt.Fprintln(os.Stderr, "Example:\n  httpstress-go http://localhost https://google.com -c 1000")
+		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress/wiki")
+		fmt.Fprintln(os.Stderr, "Example:\n  httpstress http://localhost https://google.com -c 1000")
 		os.Exit(3)
 	}
 	flag.Parse()
 
 	if *version {
-		fmt.Println("httpstress-go", Version)
-		fmt.Println("httpstress", httpstress.Version)
+		fmt.Println("httpstress/cli", Version)
+		fmt.Println("httpstress/lib", httpstress.Version)
 		fmt.Println(runtime.Version(), runtime.GOOS, runtime.GOARCH)
 		os.Exit(0)
 	}

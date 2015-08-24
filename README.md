@@ -1,4 +1,4 @@
-## httpstress-go
+## httpstress
 
 CLI utility for stress testing of HTTP servers with many concurrent connections.  
 Automatically sets `ulimit -n` on Unix systems.
@@ -15,6 +15,6 @@ Errors:
 Elapsed time: 4.791903888s
 ```
 
-#### Install: [source code](https://github.com/chillum/httpstress-go/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress-go/wiki/Installing-from-binaries)
+#### Install: [source code](https://github.com/chillum/httpstress/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress/wiki/Installing-from-binaries)
 
-#### Use: check out [the user manual](https://github.com/chillum/httpstress-go/wiki#httpstress-go)
+#### Use: check out [the user manual](https://github.com/chillum/httpstress/wiki#httpstress)
