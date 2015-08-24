@@ -60,9 +60,8 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("httpstress/cli", Version)
-		fmt.Println("httpstress/lib", httpstress.Version)
-		fmt.Println(runtime.Version(), runtime.GOOS, runtime.GOARCH)
+		fmt.Println("cli:", Version, "\nlib:", httpstress.Version,
+			"\ngo: ", runtime.Version(),"\nos: ", runtime.GOOS, "\ncpu:", runtime.GOARCH)
 		os.Exit(0)
 	}
 
