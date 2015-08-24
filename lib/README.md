@@ -1,7 +1,7 @@
-## httpstress library  [![Build Status](https://travis-ci.org/chillum/httpstress.svg?branch=master)](https://travis-ci.org/chillum/httpstress)
+## httpstress library
 
 httpstress is a Go library for HTTP stress testing.
-It launches one goroutine per concurrent connection.
+It launches one goroutine per concurrent connection
 
 ### Installation
 * Install [Git](http://git-scm.com/download)
