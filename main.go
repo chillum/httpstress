@@ -26,9 +26,6 @@ Output is YAML-formatted. Example:
    - Location: https://127.0.0.1
      Count:    333
  Elapsed time: 4.791903888s
-
-Please note that this utility uses GOMAXPROCS environment variable if it's present.
-If not, this defaults to CPU count + 1.
 */
 package main
 
@@ -71,7 +68,7 @@ func main() {
 	}
 
 	if os.Getenv("GOMAXPROCS") == "" {
-		runtime.GOMAXPROCS(runtime.NumCPU() + 1)
+		runtime.GOMAXPROCS(runtime.NumCPU())
 	}
 
 	if !setlimits(&conn) { // Platform-specific code: see unix.go and windows.go for details.
