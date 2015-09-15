@@ -26,6 +26,8 @@ Output is YAML-formatted. Example:
    - Location: https://127.0.0.1
      Count:    333
  Elapsed time: 4.791903888s
+
+It follows HTTP redirects. Non-200 HTTP return code is an error.
 */
 package main
 
