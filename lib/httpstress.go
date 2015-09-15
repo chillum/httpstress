@@ -14,7 +14,7 @@ import (
 )
 
 // Library version
-const Version = "1.5"
+const Version = "2"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
@@ -102,7 +102,11 @@ func worker(url *string, finished chan<- string, client *http.Client) {
 		req.Header.Set("User-Agent", "httpstress")
 		resp, err = client.Do(req)
 		if err == nil {
-			finished <- ""
+			if resp.StatusCode == 200 { // Check status code.
+				finished <- ""
+			} else {
+				finished <- *url
+			}
 		} else {
 			finished <- *url
 		}
