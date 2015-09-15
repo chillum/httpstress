@@ -19,7 +19,7 @@ func setlimits(limit *int) bool {
 		return false
 	}
 
-	new.Cur = uint64(*limit + 6) // Magic. 1-5 does not work, 6 seems OK.
+	new.Cur = uint64(*limit) // Magic. 1-5 does not work, 6 seems OK.
 	new.Max = new.Cur
 	if old.Cur < new.Cur || old.Max < new.Cur {
 		err := syscall.Setrlimit(syscall.RLIMIT_NOFILE, &new)
