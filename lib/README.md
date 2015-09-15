@@ -3,6 +3,9 @@
 httpstress is a Go library for HTTP stress testing.
 It launches one goroutine per concurrent connection
 
+It follows HTTP redirects. 5xx HTTP code is not an error: failed
+requests are requests, that failed to connect
+
 ### Installation
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install).
