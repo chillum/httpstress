@@ -41,7 +41,7 @@ import (
 )
 
 // Application version
-const Version = "5"
+const Version = "5.1"
 
 func main() {
 	var conn, max int
