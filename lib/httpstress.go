@@ -16,7 +16,7 @@ import (
 )
 
 // Library version
-const Version = "2"
+const Version = "2.1"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
@@ -60,6 +60,7 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 	total := len(urls) - 1
 	trans := &http.Transport{MaxIdleConnsPerHost: conn} // Use persistent connections.
 	client := &http.Client{Transport: trans}
+	client.CheckRedirect = redirect
 	n := 0
 	i := 0
 	for ; i < conn; i++ { // Launch initial workers.
@@ -92,6 +93,7 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 	return
 }
 
+// Get the URL and report status to the channel.
 func worker(url *string, finished chan<- string, client *http.Client) {
 	var err error
 	var resp *http.Response
@@ -116,4 +118,15 @@ func worker(url *string, finished chan<- string, client *http.Client) {
 	if resp != nil {
 		resp.Body.Close()
 	}
+}
+
+// Check HTTP redirects.
+func redirect(req *http.Request, via []*http.Request) error {
+	// When redirects number > 10 probably there's a problem.
+	if len(via) >= 10 {
+		return errors.New("stopped after 10 redirects")
+	}
+	// Redirects don't get User-Agent.
+	req.Header.Set("User-Agent", "httpstress")
+	return nil
 }
