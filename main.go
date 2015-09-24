@@ -11,7 +11,7 @@ Options:
  * `-v` – print version to stdout and exit
 
 Example:
- httpstress http://localhost https://google.com -c 1000
+ httpstress http://localhost https://google.com -c 2000
 
 Returns 0 if no errors, 1 if some requests failed, 2 on kill, 3 in case of invalid options
 and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
@@ -19,19 +19,24 @@ and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
 Prints elapsed time and error count for each URL to stdout (if any; does not count successful attempts).
 Usage and runtime errors go to stderr.
 
-Output is YAML-formatted. Example:
- Errors:
-   - Location: http://localhost
-     Count:    334
-   - Location: https://127.0.0.1
-     Count:    333
- Elapsed time: 4.791903888s
+Output is JSON-formatted. Example:
+  {
+    "errors": {
+      "http://google.com": 3,
+      "http://localhost": 500
+    },
+    "seconds": 12.8
+  }
 
 It follows HTTP redirects. Non-200 HTTP return code is an error.
+
+This ulility takes care of `ulimit -n` on Unix systems: sets it to
+the value of `-c` option plus 6, if the current limit is smaller.
 */
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/chillum/httpstress/lib"
 	flag "github.com/ogier/pflag"
@@ -41,10 +46,23 @@ import (
 )
 
 // Application version
-const Version = "5.2"
+const Version = "6"
+
+type results struct {
+	Errors  interface{} `json:"errors"`
+	Seconds *float32    `json:"seconds"`
+}
+
+type ver struct {
+	App  string `json:"httpstress"`
+	Go   string `json:"runtime"`
+	Os   string `json:"os"`
+	Arch string `json:"arch"`
+}
 
 func main() {
 	var conn, max int
+	var final results
 	flag.IntVarP(&conn, "c", "c", 1, "concurrent connections count")
 	flag.IntVarP(&max, "n", "n", 0, "total connections (optional)")
 	version := flag.BoolP("version", "v", false, "print version to stdout and exit")
@@ -59,8 +77,13 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("cli:", Version, "\nlib:", httpstress.Version,
-			"\ngo: ", runtime.Version(),"\nos: ", runtime.GOOS, "\ncpu:", runtime.GOARCH)
+		var ver ver
+		ver.App = Version
+		ver.Go = runtime.Version()
+		ver.Os = runtime.GOOS
+		ver.Arch = runtime.GOARCH
+		json, _ := json.Marshal(&ver)
+		fmt.Println(string(json))
 		os.Exit(0)
 	}
 
@@ -79,20 +102,21 @@ func main() {
 
 	start := time.Now()
 
-	out, err := httpstress.Test(conn, max, urls)
+	errors, err := httpstress.Test(conn, max, urls)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error:", err)
 		flag.Usage()
 	}
 
-	elapsed := time.Since(start)
+	elapsed := float32(int64(time.Since(start).Seconds() * 10)) / 10
 
-	if len(out) > 0 {
-		fmt.Println("Errors:")
-		for url, num := range out {
-			fmt.Println("  - Location:", url, "\n    Count:   ", num)
-		}
+	if len(errors) > 0 {
 		defer os.Exit(1)
 	}
-	fmt.Println("Elapsed time:", elapsed)
+
+	final.Errors = &errors
+	final.Seconds = &elapsed
+
+	json, _ := json.MarshalIndent(&final, "", "  ")
+	fmt.Println(string(json))
 }
