@@ -5,10 +5,10 @@ Usage:
  httpstress <URL list> [options]
 
 Options:
- * `URL list` – URLs to fetch (required)
- * `-c NUM` – concurrent connections number (defaults to 1)
- * `-n NUM` – total connections number (optional)
- * `-v` – print version to stdout and exit
+ * URL list   URLs to fetch (required)
+ * -c <int>   concurrent connections number (defaults to 1)
+ * -n <int>   total connections number (optional)
+ * -v         print version to stdout and exit
 
 Example:
  httpstress http://localhost https://192.168.1.1 -c 1000
