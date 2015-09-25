@@ -11,7 +11,7 @@ Options:
  * `-v` – print version to stdout and exit
 
 Example:
- httpstress http://localhost https://192.168.6.1 -c 1000
+ httpstress http://localhost https://192.168.1.1 -c 1000
 
 Returns 0 if no errors, 1 if some requests failed, 2 on kill and 3 in case of invalid options.
 
@@ -67,7 +67,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress/wiki")
-		fmt.Fprintln(os.Stderr, "Example:\n  httpstress http://localhost https://192.168.6.1 -c 1000")
+		fmt.Fprintln(os.Stderr, "Example:\n  httpstress http://localhost https://192.168.1.1 -c 1000")
 		os.Exit(3)
 	}
 	flag.Parse()
