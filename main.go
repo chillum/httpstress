@@ -66,8 +66,8 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
 		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress/wiki")
 		fmt.Fprintln(os.Stderr, "Example:\n  httpstress http://localhost https://192.168.1.1 -c 1000")
+		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress/wiki")
 		os.Exit(3)
 	}
 	flag.Parse()
