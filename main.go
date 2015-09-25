@@ -28,6 +28,8 @@ Output is JSON-formatted. Example:
   }
 
 It follows HTTP redirects. Non-200 HTTP return code is an error.
+
+Be sure to set `ulimit -n` on Unix systems high enough.
 */
 package main
 
