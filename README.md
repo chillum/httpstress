@@ -1,7 +1,6 @@
 ## httpstress
 
-CLI utility for stress testing of HTTP servers with many concurrent connections.  
-Automatically sets `ulimit -n` on Unix systems.
+CLI utility for stress testing of HTTP servers with many concurrent connections.
 
 Prints elapsed time and error count for each URL to stdout (if any).  
 Produces JSON-formatted output like:

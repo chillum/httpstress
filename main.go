@@ -13,8 +13,7 @@ Options:
 Example:
  httpstress http://localhost https://google.com -c 2000
 
-Returns 0 if no errors, 1 if some requests failed, 2 on kill, 3 in case of invalid options
-and 4 if it encounters a setrlimit(2)/getrlimit(2) error.
+Returns 0 if no errors, 1 if some requests failed, 2 on kill and 3 in case of invalid options.
 
 Prints elapsed time and error count for each URL to stdout (if any; does not count successful attempts).
 Usage and runtime errors go to stderr.
@@ -29,9 +28,6 @@ Output is JSON-formatted. Example:
   }
 
 It follows HTTP redirects. Non-200 HTTP return code is an error.
-
-This ulility takes care of `ulimit -n` on Unix systems: sets it to
-the value of `-c` option plus 6, if the current limit is smaller.
 */
 package main
 
@@ -46,7 +42,7 @@ import (
 )
 
 // Application version
-const Version = "6"
+const Version = "6.1"
 
 type results struct {
 	Errors  interface{} `json:"errors"`
@@ -94,10 +90,6 @@ func main() {
 
 	if os.Getenv("GOMAXPROCS") == "" {
 		runtime.GOMAXPROCS(runtime.NumCPU())
-	}
-
-	if !setlimits(&conn) { // Platform-specific code: see unix.go and windows.go for details.
-		os.Exit(4)
 	}
 
 	start := time.Now()
