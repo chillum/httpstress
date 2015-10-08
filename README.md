@@ -8,8 +8,8 @@ Produces JSON-formatted output like:
 ```json
 {
   "errors": {
-    "http://google.com": 3,
-    "http://localhost": 500
+    "http://localhost": 500,
+    "https://192.168.1.1": 3
   },
   "seconds": 12.8
 }
