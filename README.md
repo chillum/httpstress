@@ -17,4 +17,4 @@ Produces JSON-formatted output like:
 
 #### Install: [source code](https://github.com/chillum/httpstress/wiki/Building-from-source) or [binary release](https://github.com/chillum/httpstress/wiki/Installing-from-binaries)
 
-#### Use: check out [the user manual](https://github.com/chillum/httpstress/wiki#httpstress)
+#### Use: check out [the user manual](https://github.com/chillum/httpstress/wiki)
