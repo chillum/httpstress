@@ -15,7 +15,7 @@ import (
 	"strings"
 )
 
-// Library version
+// Version is the library version
 const Version = "2.1"
 
 /*

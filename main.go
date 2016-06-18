@@ -43,7 +43,7 @@ import (
 	"time"
 )
 
-// Application version
+// Version is the application version
 const Version = "6.1"
 
 type results struct {
