@@ -90,10 +90,6 @@ func main() {
 		flag.Usage()
 	}
 
-	if os.Getenv("GOMAXPROCS") == "" {
-		runtime.GOMAXPROCS(runtime.NumCPU())
-	}
-
 	start := time.Now()
 
 	errors, err := httpstress.Test(conn, max, urls)
