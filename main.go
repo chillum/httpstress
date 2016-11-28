@@ -2,16 +2,15 @@
 CLI utility for stress testing of HTTP servers with many concurrent connections
 
 Usage:
- httpstress <URL list> [options]
+ httpstress [options] <URL list>
 
 Options:
- * URL list   URLs to fetch (required)
  * -c <int>   concurrent connections number (defaults to 1)
- * -n <int>   total connections number (optional)
- * -v         print version to stdout and exit
+ * -n <int>   total connections number (defaults to URL count)
+ * --version  print version to stdout and exit
 
 Example:
- httpstress http://localhost https://192.168.1.1 -c 1000
+ httpstress -c 1000 http://localhost https://192.168.1.1
 
 Returns 0 if no errors, 1 if some requests failed, 2 on kill and 3 in case of invalid options.
 
@@ -35,16 +34,17 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
-	"github.com/chillum/httpstress/lib"
-	flag "github.com/ogier/pflag"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/chillum/httpstress/lib"
 )
 
 // Version is the application version
-const Version = "6.2"
+const Version = "6.3"
 
 type results struct {
 	Errors  interface{} `json:"errors"`
@@ -61,15 +61,14 @@ type ver struct {
 func main() {
 	var conn, max int
 	var final results
-	flag.IntVarP(&conn, "c", "c", 1, "concurrent connections count")
-	flag.IntVarP(&max, "n", "n", 0, "total connections (optional)")
-	version := flag.BoolP("version", "v", false, "print version to stdout and exit")
+	flag.IntVar(&conn, "c", 1, "concurrent connections")
+	flag.IntVar(&max, "n", 0, "total connections (defaults to URL count)")
+	version := flag.Bool("version", false, "print version to stdout and exit")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "<URL list> [options]")
-		fmt.Fprintln(os.Stderr, "  <URL list>: URLs to fetch (required)")
+		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>\nOptions:")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "Example:\n  httpstress http://localhost https://192.168.1.1 -c 1000")
-		fmt.Fprintln(os.Stderr, "Docs:\n  https://github.com/chillum/httpstress/wiki")
+		fmt.Fprintln(os.Stderr, "Example: httpstress -c 1000 http://localhost https://192.168.1.1")
+		fmt.Fprintln(os.Stderr, "Docs:    https://github.com/chillum/httpstress/wiki")
 		os.Exit(3)
 	}
 	flag.Parse()
@@ -98,7 +97,7 @@ func main() {
 		flag.Usage()
 	}
 
-	elapsed := float32(int64(time.Since(start).Seconds() * 10)) / 10
+	elapsed := float32(int64(time.Since(start).Seconds()*10)) / 10
 
 	if len(errors) > 0 {
 		defer os.Exit(1)
