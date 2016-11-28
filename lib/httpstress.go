@@ -16,7 +16,7 @@ import (
 )
 
 // Version is the library version
-const Version = "2.1"
+const Version = "2.1.1"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
@@ -43,9 +43,14 @@ Returns map: {url}, {fail count} or error (failed URL message). Example:
 	}
 */
 func Test(conn int, max int, urls []string) (results map[string]int, err error) {
+	if conn < 1 {
+		err = errors.New("connections number cannot be less than 1")
+		return
+	}
+
 	for _, i := range urls {
 		if !strings.HasPrefix(i, "http://") && !strings.HasPrefix(i, "https://") {
-			err = errors.New("Not a HTTP(S) URL: " + i)
+			err = errors.New("not a HTTP(S) URL: " + i)
 			return
 		}
 	}
