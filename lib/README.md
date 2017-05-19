@@ -9,7 +9,6 @@ Non-200 HTTP return codes are considered as errors
 ### Installation
 * Install [Git](http://git-scm.com/download)
 * Install [Go runtime](http://golang.org/doc/install)
-* Set [`GOPATH`](http://golang.org/doc/code.html#GOPATH)
 * `go get github.com/chillum/httpstress/lib`
 
 ### Docs
