@@ -10,13 +10,17 @@ A CLI utility is avaliable at github.com/chillum/httpstress
 package httpstress
 
 import (
+	"context"
 	"errors"
+	"net"
 	"net/http"
 	"strings"
+
+	"github.com/rs/dnscache"
 )
 
 // Version is the library version
-const Version = "2.1.1"
+const Version = "2.2"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
@@ -63,7 +67,24 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 	results = make(map[string]int)
 	finished := make(chan string)
 	total := len(urls) - 1
-	trans := &http.Transport{MaxIdleConnsPerHost: conn} // Use persistent connections.
+	r := &dnscache.Resolver{}
+	trans := &http.Transport{
+		MaxIdleConnsPerHost: conn, // Use persistent connections.
+		DialContext: func(ctx context.Context, network string, addr string) (conn net.Conn, err error) {
+			separator := strings.LastIndex(addr, ":")
+			ips, err := r.LookupHost(ctx, addr[:separator])
+			if err != nil {
+				return nil, err
+			}
+			for _, ip := range ips {
+				conn, err = net.Dial(network, ip+addr[separator:])
+				if err == nil {
+					break
+				}
+			}
+			return
+		},
+	}
 	client := &http.Client{Transport: trans}
 	client.CheckRedirect = redirect
 	n := 0

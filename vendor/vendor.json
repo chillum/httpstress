@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "FW7evPwFDReuQz4FxtBOO5oQevQ=",
+			"path": "github.com/rs/dnscache",
+			"revision": "e51682bcba05c802f2193659550ecf7f36eb07aa",
+			"revisionTime": "2018-04-16T05:51:07Z"
+		},
+		{
+			"checksumSHA1": "sHtsQ7qkvn3ITwp8dQuR0aChsD0=",
+			"path": "github.com/rs/dnscache/internal/singleflight",
+			"revision": "e51682bcba05c802f2193659550ecf7f36eb07aa",
+			"revisionTime": "2018-04-16T05:51:07Z"
+		}
+	],
+	"rootPath": "github.com/chillum/httpstress"
+}
