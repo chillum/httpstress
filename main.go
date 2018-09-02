@@ -44,7 +44,7 @@ import (
 )
 
 // Version is the application version
-const Version = "6.4"
+const Version = "6.5"
 
 type results struct {
 	Errors  interface{} `json:"errors"`

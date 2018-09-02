@@ -2,13 +2,14 @@
 package main
 
 import (
-	"github.com/chillum/httpstress/lib"
 	"testing"
+
+	"github.com/chillum/httpstress/lib"
 )
 
 func TestHttpStressTest(t *testing.T) {
 	up := []string{"https://google.com", "http://google.com"} // These URLs should pass.
-	down := []string{"http://test.invalid"}                   // This should fail.
+	down := []string{"http://localhost:1234"}                 // This should fail.
 	invalid := []string{"ftp://localhost"}                    // Error. Non HTTP/HTTPS URL.
 
 	if _, err := httpstress.Test(1, 1, invalid); err == nil {

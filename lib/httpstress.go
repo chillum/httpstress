@@ -12,15 +12,17 @@ package httpstress
 import (
 	"context"
 	"errors"
-	"net"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 
-	"github.com/rs/dnscache"
+	"github.com/chillum/dnscache"
 )
 
 // Version is the library version
-const Version = "2.2"
+const Version = "2.3"
 
 /*
 Test launches {conn} goroutines to fetch HTTP/HTTPS locations in {urls} list
@@ -52,9 +54,28 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 		return
 	}
 
+	// Pre-resolve hostnames.
+	r := &dnscache.Resolver{}
 	for _, i := range urls {
 		if !strings.HasPrefix(i, "http://") && !strings.HasPrefix(i, "https://") {
 			err = errors.New("not a HTTP(S) URL: " + i)
+			return
+		}
+		var u *url.URL
+		u, err = url.Parse(i)
+		if err != nil {
+			return
+		}
+		_, err = r.LookupHost(context.Background(), u.Hostname())
+		// If we're not able to resolve it, bail out, not try again multiple times.
+		// It's likely still be not there.
+		if err != nil {
+			// DNS lookup errors are cryptic, make them more understandable.
+			if u.Hostname() == "" {
+				err = errors.New("empty hostname in url: " + i)
+			} else {
+				err = errors.New("cannot resolve hostname: " + u.Hostname())
+			}
 			return
 		}
 	}
@@ -67,23 +88,9 @@ func Test(conn int, max int, urls []string) (results map[string]int, err error) 
 	results = make(map[string]int)
 	finished := make(chan string)
 	total := len(urls) - 1
-	r := &dnscache.Resolver{}
 	trans := &http.Transport{
-		MaxIdleConnsPerHost: conn, // Use persistent connections.
-		DialContext: func(ctx context.Context, network string, addr string) (conn net.Conn, err error) {
-			separator := strings.LastIndex(addr, ":")
-			ips, err := r.LookupHost(ctx, addr[:separator])
-			if err != nil {
-				return nil, err
-			}
-			for _, ip := range ips {
-				conn, err = net.Dial(network, ip+addr[separator:])
-				if err == nil {
-					break
-				}
-			}
-			return
-		},
+		DialContext:         r.Dial, // Use DNS cache.
+		MaxIdleConnsPerHost: conn,   // Use persistent connections.
 	}
 	client := &http.Client{Transport: trans}
 	client.CheckRedirect = redirect
@@ -142,6 +149,7 @@ func worker(url *string, finished chan<- string, client *http.Client) {
 		}
 	}
 	if resp != nil {
+		io.Copy(ioutil.Discard, resp.Body)
 		resp.Body.Close()
 	}
 }

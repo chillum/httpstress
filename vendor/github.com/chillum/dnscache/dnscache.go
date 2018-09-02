@@ -3,12 +3,14 @@ package dnscache
 import (
 	"context"
 	"net"
+	"strings"
 	"sync"
 	"time"
 
-	"github.com/rs/dnscache/internal/singleflight"
+	"golang.org/x/sync/singleflight"
 )
 
+// Resolver adds a DNS cache layer to Go's `net.Resolver`.
 type Resolver struct {
 	// Timeout defines the maximum allowed time allowed for a lookup.
 	Timeout time.Duration
@@ -64,6 +66,22 @@ func (r *Resolver) Refresh(clearUnused bool) {
 	}
 }
 
+// Dial is a function to use in DialContext for http.Transport.
+func (r *Resolver) Dial(ctx context.Context, network string, addr string) (conn net.Conn, err error) {
+	separator := strings.LastIndex(addr, ":")
+	ips, err := r.LookupHost(ctx, addr[:separator])
+	if err != nil {
+		return nil, err
+	}
+	for _, ip := range ips {
+		conn, err = net.Dial(network, ip+addr[separator:])
+		if err == nil {
+			break
+		}
+	}
+	return
+}
+
 func (r *Resolver) init() {
 	r.cache = make(map[string]*cacheEntry)
 }
@@ -74,7 +92,7 @@ var lookupGroup singleflight.Group
 
 func (r *Resolver) lookup(ctx context.Context, key string) (rrs []string, err error) {
 	var found bool
-	rrs, err, found = r.load(key)
+	rrs, found, err = r.load(key)
 	if !found {
 		if r.onCacheMiss != nil {
 			r.onCacheMiss()
@@ -100,7 +118,7 @@ func (r *Resolver) update(ctx context.Context, key string, used bool) (rrs []str
 			// We had concurrent lookups, check if the cache is already updated
 			// by a friend.
 			var found bool
-			rrs, err, found = r.load(key)
+			rrs, found, err = r.load(key)
 			if found {
 				return
 			}
@@ -154,7 +172,7 @@ func (r *Resolver) getCtx() (ctx context.Context, cancel context.CancelFunc) {
 	return
 }
 
-func (r *Resolver) load(key string) (rrs []string, err error, found bool) {
+func (r *Resolver) load(key string) (rrs []string, found bool, err error) {
 	r.mu.RLock()
 	var entry *cacheEntry
 	entry, found = r.cache[key]
@@ -171,7 +189,7 @@ func (r *Resolver) load(key string) (rrs []string, err error, found bool) {
 		entry.used = true
 		r.mu.Unlock()
 	}
-	return rrs, err, true
+	return rrs, true, err
 }
 
 func (r *Resolver) storeLocked(key string, rrs []string, used bool, err error) {

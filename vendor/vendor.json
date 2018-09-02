@@ -3,16 +3,16 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "FW7evPwFDReuQz4FxtBOO5oQevQ=",
-			"path": "github.com/rs/dnscache",
-			"revision": "e51682bcba05c802f2193659550ecf7f36eb07aa",
-			"revisionTime": "2018-04-16T05:51:07Z"
+			"checksumSHA1": "Az791uDolEky0OSyUW2vfVEgIGQ=",
+			"path": "github.com/chillum/dnscache",
+			"revision": "c4781e7c69eff9afc1ad2e1aa40167ccc98d5d37",
+			"revisionTime": "2018-09-02T00:23:39Z"
 		},
 		{
-			"checksumSHA1": "sHtsQ7qkvn3ITwp8dQuR0aChsD0=",
-			"path": "github.com/rs/dnscache/internal/singleflight",
-			"revision": "e51682bcba05c802f2193659550ecf7f36eb07aa",
-			"revisionTime": "2018-04-16T05:51:07Z"
+			"checksumSHA1": "VhUZFUuhLFSBFUfskMC4am5RIdc=",
+			"path": "golang.org/x/sync/singleflight",
+			"revision": "1d60e4601c6fd243af51cc01ddf169918a5407ca",
+			"revisionTime": "2018-03-14T17:21:19Z"
 		}
 	],
 	"rootPath": "github.com/chillum/httpstress"
