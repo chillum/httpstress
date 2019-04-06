@@ -10,7 +10,7 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
-// Resolver adds a DNS cache layer to Go's `net.Resolver`.
+// Resolver adds a DNS cache layer to Go's net.Resolver.
 type Resolver struct {
 	// Timeout defines the maximum allowed time allowed for a lookup.
 	Timeout time.Duration
@@ -53,20 +53,35 @@ func (r *Resolver) Refresh(clearUnused bool) {
 	r.once.Do(r.init)
 	r.mu.RLock()
 	update := make([]string, 0, len(r.cache))
+	del := make([]string, 0, len(r.cache))
 	for key, entry := range r.cache {
 		if entry.used {
 			update = append(update, key)
 		} else if clearUnused {
-			delete(r.cache, key)
+			del = append(del, key)
 		}
 	}
 	r.mu.RUnlock()
+
+	if len(del) > 0 {
+		r.mu.Lock()
+		for _, key := range del {
+			delete(r.cache, key)
+		}
+		r.mu.Unlock()
+	}
+
 	for _, key := range update {
 		r.update(context.Background(), key, false)
 	}
 }
 
 // Dial is a function to use in DialContext for http.Transport.
+// It looks up the host via Resolver and passes it to net.Dial.
+//
+// Be warned that this is a simplistic implementation and misses a lot of features like dual stack support,
+// correct handling of context tracing, randomization of adds etc.
+// This implementation will also choke on "unix", "unixgram" and "unixpacket" network.
 func (r *Resolver) Dial(ctx context.Context, network string, addr string) (conn net.Conn, err error) {
 	separator := strings.LastIndex(addr, ":")
 	ips, err := r.LookupHost(ctx, addr[:separator])
