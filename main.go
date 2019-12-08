@@ -40,11 +40,11 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/chillum/httpstress/lib"
+	httpstress "github.com/chillum/httpstress/lib"
 )
 
 // Version is the application version
-const Version = "6.5"
+const Version = "6.5.1"
 
 type results struct {
 	Errors  interface{} `json:"errors"`
