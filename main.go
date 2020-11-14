@@ -44,7 +44,7 @@ import (
 )
 
 // Version is the application version
-const Version = "6.5.1"
+const Version = "6.5.2"
 
 type results struct {
 	Errors  interface{} `json:"errors"`
@@ -65,7 +65,7 @@ func main() {
 	flag.IntVar(&max, "n", 0, "total connections (defaults to URL count)")
 	version := flag.Bool("version", false, "print version to stdout and exit")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "Usage:", os.Args[0], "[options] <URL list>\nOptions:")
+		fmt.Fprintln(os.Stderr, "Usage: httpstress [options] <URL list>\nOptions:")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr, "Example: httpstress -c 1000 http://localhost https://192.168.1.1")
 		fmt.Fprintln(os.Stderr, "Docs:    https://github.com/chillum/httpstress/wiki")

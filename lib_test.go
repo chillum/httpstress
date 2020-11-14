@@ -4,7 +4,7 @@ package main
 import (
 	"testing"
 
-	"github.com/chillum/httpstress/lib"
+	httpstress "github.com/chillum/httpstress/lib"
 )
 
 func TestHttpStressTest(t *testing.T) {
@@ -18,6 +18,10 @@ func TestHttpStressTest(t *testing.T) {
 
 	if err, _ := httpstress.Test(1, 1, up); len(err) > 0 {
 		t.Errorf("%s down (should be up)", up)
+	}
+
+	if err, _ := httpstress.Test(1, 10, up); len(err) > 0 {
+		t.Errorf("%s down in consecutive tests (should be up)", up)
 	}
 
 	if err, _ := httpstress.Test(1, 1, down); len(err) == 0 {

@@ -1,3 +1,4 @@
-Gemfile.lock
-httpstress
-httpstress.test
+/Gemfile.lock
+/httpstress
+/httpstress.exe
+/httpstress.test
