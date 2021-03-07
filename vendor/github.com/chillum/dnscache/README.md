@@ -1,6 +1,6 @@
 # DNS Lookup Cache
 
-[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/rs/dnscache) [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/rs/dnscache/master/LICENSE) [![Build Status](https://travis-ci.org/rs/dnscache.svg?branch=master)](https://travis-ci.org/rs/dnscache) [![Coverage](http://gocover.io/_badge/github.com/rs/dnscache)](http://gocover.io/github.com/rs/dnscache)
+[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/chillum/dnscache) [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/chillum/dnscache/master/LICENSE)
 
 The dnscache package provides a DNS cache layer to Go's `net.Resolver`.
 
@@ -9,7 +9,7 @@ The dnscache package provides a DNS cache layer to Go's `net.Resolver`.
 Install using the "go get" command:
 
 ```
-go get github.com/rs/dnscache
+go get github.com/chillum/dnscache
 ```
 
 # Usage
