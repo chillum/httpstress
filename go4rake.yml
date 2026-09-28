@@ -3,7 +3,9 @@ platforms:
     arch: 386
     zip:  win32
   - name: darwin
-    arch: amd64
+    arch:
+      - amd64
+      - arm64
     zip:  mac
   - name: linux
     arch:
