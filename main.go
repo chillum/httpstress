@@ -2,15 +2,17 @@
 CLI utility for stress testing of HTTP servers with many concurrent connections
 
 Usage:
- httpstress [options] <URL list>
+
+	httpstress [options] <URL list>
 
 Options:
- * -c <int>   concurrent connections number (defaults to 1)
- * -n <int>   total connections number (defaults to URL count)
- * --version  print version to stdout and exit
+  - -c <int>   concurrent connections number (defaults to 1)
+  - -n <int>   total connections number (defaults to URL count)
+  - --version  print version to stdout and exit
 
 Example:
- httpstress -c 1000 http://localhost https://192.168.1.1
+
+	httpstress -c 1000 http://localhost https://192.168.1.1
 
 Returns 0 if no errors, 1 if some requests failed, 2 on kill and 3 in case of invalid options.
 
@@ -18,13 +20,14 @@ Prints elapsed time and error count for each URL to stdout (if any; does not cou
 Usage and runtime errors go to stderr.
 
 Output is JSON-formatted. Example:
-  {
-    "errors": {
-      "http://localhost": 500,
-      "https://192.168.1.1": 3
-    },
-    "seconds": 12.8
-  }
+
+	{
+	  "errors": {
+	    "http://localhost": 500,
+	    "https://192.168.1.1": 3
+	  },
+	  "seconds": 12.8
+	}
 
 It follows HTTP redirects. Non-200 HTTP return code is an error.
 
@@ -44,7 +47,7 @@ import (
 )
 
 // Version is the application version
-const Version = "6.5.3"
+const Version = "6.5.4"
 
 type results struct {
 	Errors  interface{} `json:"errors"`
